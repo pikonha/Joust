@@ -10,13 +10,15 @@ package Model;
  * @author Lucas
  */
 class Posicao {
-    protected int ocupante;
+    
     protected int linha;
     protected int coluna;
+    protected int ocupante;
     
     public Posicao(int linha, int coluna) {
-        this.linha=linha;
-        this.coluna=coluna;
+        this.linha = linha;
+        this.coluna = coluna;
+        this.ocupante = 0;
     }
     
     public boolean verificarOcupada() {
