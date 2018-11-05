@@ -13,7 +13,7 @@ public class Tabuleiro {
     
     protected Cavalo jogador1;
     protected Cavalo jogador2;
-    protected Posicao posicoes[][] = new Posicao[7][7];
+    protected Posicao posicoes[][] = new Posicao[8][8];
     protected boolean conectado;
     private boolean partidaEmAndamento;
     

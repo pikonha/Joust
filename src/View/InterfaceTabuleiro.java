@@ -108,7 +108,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jButton67 = new javax.swing.JButton();
         jButton68 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -125,6 +124,8 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton50 = new javax.swing.JButton();
         jButton51 = new javax.swing.JButton();
@@ -135,7 +136,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(java.awt.Color.pink);
+        jPanel1.setBackground(java.awt.Color.lightGray);
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setBackground(java.awt.Color.white);
@@ -163,49 +164,42 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jButton11.setBackground(java.awt.Color.black);
         jButton11.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton6.setForeground(java.awt.Color.black);
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/pcavalo.png"))); // NOI18N
         jButton6.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton7.setBackground(java.awt.Color.black);
         jButton7.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton8.setForeground(java.awt.Color.black);
         jButton8.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 0));
         jButton9.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton12.setForeground(java.awt.Color.black);
         jButton12.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton13.setBackground(new java.awt.Color(0, 0, 0));
         jButton13.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton14.setForeground(java.awt.Color.black);
         jButton14.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton15.setBackground(java.awt.Color.black);
         jButton15.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton16.setForeground(java.awt.Color.black);
         jButton16.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton17.setBackground(java.awt.Color.black);
         jButton17.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton18.setForeground(java.awt.Color.black);
         jButton18.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton19.setBackground(new java.awt.Color(0, 0, 0));
         jButton19.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton20.setForeground(java.awt.Color.black);
         jButton20.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton21.setBackground(new java.awt.Color(0, 0, 0));
         jButton21.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton22.setForeground(java.awt.Color.black);
         jButton22.setPreferredSize(new java.awt.Dimension(110, 110));
         jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,79 +210,66 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jButton23.setBackground(java.awt.Color.black);
         jButton23.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton24.setForeground(java.awt.Color.black);
         jButton24.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton25.setBackground(new java.awt.Color(0, 0, 0));
         jButton25.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton26.setForeground(java.awt.Color.black);
         jButton26.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton27.setBackground(new java.awt.Color(0, 0, 0));
         jButton27.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton28.setForeground(java.awt.Color.black);
         jButton28.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton29.setBackground(java.awt.Color.black);
         jButton29.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton30.setForeground(java.awt.Color.black);
         jButton30.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton31.setBackground(java.awt.Color.black);
         jButton31.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton32.setForeground(java.awt.Color.black);
         jButton32.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton33.setBackground(new java.awt.Color(0, 0, 0));
         jButton33.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton34.setForeground(java.awt.Color.black);
         jButton34.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton35.setBackground(new java.awt.Color(0, 0, 0));
         jButton35.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton36.setForeground(java.awt.Color.black);
         jButton36.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton37.setBackground(java.awt.Color.black);
         jButton37.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton38.setForeground(java.awt.Color.black);
         jButton38.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton39.setBackground(new java.awt.Color(0, 0, 0));
         jButton39.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton40.setForeground(java.awt.Color.black);
         jButton40.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton41.setBackground(new java.awt.Color(0, 0, 0));
         jButton41.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton42.setForeground(java.awt.Color.black);
         jButton42.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton43.setBackground(java.awt.Color.black);
         jButton43.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton44.setForeground(java.awt.Color.black);
         jButton44.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton45.setBackground(java.awt.Color.black);
         jButton45.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton46.setForeground(java.awt.Color.black);
         jButton46.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton47.setBackground(new java.awt.Color(0, 0, 0));
         jButton47.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton48.setForeground(java.awt.Color.black);
         jButton48.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton49.setBackground(new java.awt.Color(0, 0, 0));
@@ -329,19 +310,16 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jButton55.setBackground(java.awt.Color.black);
         jButton55.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton56.setForeground(java.awt.Color.black);
         jButton56.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton57.setBackground(new java.awt.Color(0, 0, 0));
         jButton57.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton58.setForeground(java.awt.Color.black);
         jButton58.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton59.setBackground(new java.awt.Color(0, 0, 0));
         jButton59.setPreferredSize(new java.awt.Dimension(110, 110));
 
-        jButton60.setForeground(java.awt.Color.black);
         jButton60.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton61.setBackground(java.awt.Color.white);
@@ -353,17 +331,16 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jButton62.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton63.setBackground(java.awt.Color.white);
-        jButton63.setForeground(java.awt.Color.black);
         jButton63.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton64.setBackground(java.awt.Color.black);
         jButton64.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton65.setBackground(java.awt.Color.white);
-        jButton65.setForeground(java.awt.Color.black);
         jButton65.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton66.setBackground(java.awt.Color.black);
+        jButton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/bcavalo.png"))); // NOI18N
         jButton66.setPreferredSize(new java.awt.Dimension(110, 110));
         jButton66.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,15 +349,12 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         });
 
         jButton67.setBackground(java.awt.Color.white);
-        jButton67.setForeground(java.awt.Color.black);
         jButton67.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jButton68.setBackground(java.awt.Color.black);
         jButton68.setPreferredSize(new java.awt.Dimension(110, 110));
 
         jLabel24.setText("3");
-
-        jLabel26.setText("0");
 
         jLabel27.setText("0");
 
@@ -509,9 +483,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(81, 81, 81)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel26)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton10, jButton11, jButton12, jButton13, jButton14, jButton15, jButton16, jButton17, jButton18, jButton19, jButton2, jButton20, jButton21, jButton22, jButton23, jButton24, jButton25, jButton26, jButton27, jButton28, jButton29, jButton3, jButton30, jButton31, jButton32, jButton33, jButton34, jButton35, jButton36, jButton37, jButton38, jButton39, jButton4, jButton40, jButton41, jButton42, jButton43, jButton44, jButton45, jButton46, jButton47, jButton48, jButton49, jButton5, jButton6, jButton63, jButton64, jButton65, jButton66, jButton67, jButton68, jButton7, jButton8, jButton9});
@@ -679,11 +651,9 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addComponent(jLabel27))
                     .addComponent(jLabel11)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel12))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel26)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
                         .addComponent(jLabel16)))
@@ -725,6 +695,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jTextField3.setEnabled(false);
         jTextField3.setFocusable(false);
 
+        jTextField4.setEnabled(false);
+
+        jTextField5.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -755,10 +729,13 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -771,7 +748,9 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -782,8 +761,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -829,7 +810,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(29, 29, 29)
                 .addComponent(jButton50)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton51)
@@ -837,7 +818,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addComponent(jButton52)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton53)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton50, jButton51, jButton52, jButton53});
@@ -861,7 +842,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 12, Short.MAX_VALUE))
@@ -1005,7 +986,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1022,5 +1002,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
