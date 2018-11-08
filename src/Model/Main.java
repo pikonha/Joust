@@ -6,7 +6,6 @@
 package Model;
 
 import View.InterfaceTabuleiro;
-import javax.swing.UIManager;
 
 /**
  *
@@ -15,18 +14,14 @@ import javax.swing.UIManager;
 public class Main {
     
     public static void main(String[] args) {  
-        try  {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }   
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         
-        InterfaceTabuleiro tabuleiro = new InterfaceTabuleiro();
-        tabuleiro.setVisible(true);
+        Tabuleiro tabuleiro = new Tabuleiro();
+        
+        InterfaceTabuleiro Itabuleiro = new InterfaceTabuleiro(tabuleiro);
+        Itabuleiro.setVisible(true);
+        
+        
+        
+        
     }
 }
