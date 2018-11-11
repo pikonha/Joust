@@ -37,8 +37,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     
     private void ClickInterface(ActionEvent evt) {                                
         ((JButton)evt.getSource()).setVisible(false);
-    }  
-    
+    }     
    
     
     
