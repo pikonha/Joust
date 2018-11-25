@@ -11,9 +11,9 @@ package Model;
  */
 class Posicao {
     
-    protected int linha;
-    protected int coluna;
-    protected int ocupante;
+    private int linha;
+    private int coluna;
+    private int ocupante;
     
     public Posicao(int linha, int coluna) {
         this.linha = linha;
@@ -33,7 +33,7 @@ class Posicao {
         this.ocupante = 0;
     }
 
-    public int informarOcupacao() {
+    public int informarOcupante() {
         return this.ocupante;
     }
 

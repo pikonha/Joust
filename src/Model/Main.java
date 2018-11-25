@@ -15,10 +15,10 @@ public class Main {
     
     public static void main(String[] args) {  
         
-        Tabuleiro tabuleiro = new Tabuleiro();
+       Tabuleiro tabuleiro = new Tabuleiro();
         
-        InterfaceTabuleiro Itabuleiro = new InterfaceTabuleiro(tabuleiro);
-        Itabuleiro.setVisible(true);
+       InterfaceTabuleiro Itabuleiro = new InterfaceTabuleiro(tabuleiro);
+       Itabuleiro.setVisible(true);
         
         
         

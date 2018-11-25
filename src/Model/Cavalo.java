@@ -11,34 +11,28 @@ package Model;
  */
 public class Cavalo {
     
-    protected String nome;
-    protected Cor cor;
-    protected boolean vencedor;
-    protected boolean daVez;
+    private String idJogador;
+    private boolean vencedor;
+    private boolean daVez;   
+    private int cor;
     
-    
-    public Cavalo(String nome, Cor cor){
-        this.nome = nome;
-        this.cor = cor;
+    public Cavalo(String nome, int cor){
+        this.idJogador = nome;
         this.vencedor = false;
         this.daVez = false;
-    }
+    }      
     
     public void assumirVencedor() {
         this.vencedor=true;
     }
     
-    public boolean getVencedor() {
+    public boolean informarVencedor() {
         return this.vencedor;
     }
 
-    public String informarNome() {
-        return this.nome;
-    }    
-    
-    public Cor getCor() {
-        return this.cor;
-    }
+    public String informarId() {
+        return this.idJogador;
+    }       
     
     public boolean informarDaVez() {
         return this.daVez;
