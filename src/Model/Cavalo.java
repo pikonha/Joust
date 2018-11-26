@@ -38,6 +38,10 @@ public class Cavalo {
         return this.daVez;
     }
     
+    public int informarCor() {
+        return cor;
+    }
+    
     public void setDaVez(boolean daVez) {
         this.daVez = daVez;
     }

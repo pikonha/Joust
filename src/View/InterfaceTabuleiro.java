@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -60,31 +62,32 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     }
     
     
-    private void clickInterface(ActionEvent evt) {    
-        String a = ((JButton)evt.getSource()).getName();
-        int b = 4;
+    private void clickInterface(ActionEvent evt) {     
+        String name = ((JButton)evt.getSource()).getName();
+        
+        int linha = Integer.parseInt(name.substring(1, 2));
+        int coluna = Integer.parseInt(name.substring(2, 3));
+        
+        tabuleiro.click(linha, coluna);
     }
     
     public void clickConectar(ActionEvent evt) {
-        tabuleiro.
+        tabuleiro.conectar();
     }
     
     public void clickDesconectar(ActionEvent evt) {
-        
+        tabuleiro.desconectar();
     }
     
     public void clickEncerrar(ActionEvent evt) {
-        
+        tabuleiro.fechar();
     }
     
     public void clickNovoJogo(ActionEvent evt) {
-        
-    }
-      
+        tabuleiro.novoJogo("jogador1", "jogador2");
+    }     
     
-    
-    private void initComponents() {
-
+   private void initComponents() {
         jLabel25 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         b71 = new javax.swing.JButton();
@@ -131,10 +134,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b06 = new javax.swing.JButton();
         b67 = new javax.swing.JButton();
         b57 = new javax.swing.JButton();
-        b473 = new javax.swing.JButton();
+        b47 = new javax.swing.JButton();
         b37 = new javax.swing.JButton();
         b27 = new javax.swing.JButton();
-        b173 = new javax.swing.JButton();
+        b17 = new javax.swing.JButton();
         b07 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -180,8 +183,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel10 = new javax.swing.JLabel();
-        textTurno = new javax.swing.JTextField();
         textJ1 = new javax.swing.JTextField();
         textJ2 = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
@@ -191,6 +192,8 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         bDesconectar = new javax.swing.JButton();
         bNovoJogo = new javax.swing.JButton();
         bEncerrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messageText = new javax.swing.JTextArea();
         jLabel26 = new javax.swing.JLabel();
 
         jLabel25.setText("jLabel9");
@@ -318,7 +321,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b44.setPreferredSize(new java.awt.Dimension(100, 100));
         b44.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clickInterface(evt);
+                ClickInterface(evt);
             }
         });
 
@@ -412,10 +415,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b57.setMinimumSize(new java.awt.Dimension(100, 100));
         b57.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        b473.setBackground(java.awt.Color.black);
-        b473.setMaximumSize(new java.awt.Dimension(100, 100));
-        b473.setMinimumSize(new java.awt.Dimension(100, 100));
-        b473.setPreferredSize(new java.awt.Dimension(100, 100));
+        b47.setBackground(java.awt.Color.black);
+        b47.setMaximumSize(new java.awt.Dimension(100, 100));
+        b47.setMinimumSize(new java.awt.Dimension(100, 100));
+        b47.setPreferredSize(new java.awt.Dimension(100, 100));
 
         b37.setMaximumSize(new java.awt.Dimension(100, 100));
         b37.setMinimumSize(new java.awt.Dimension(100, 100));
@@ -426,15 +429,87 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b27.setMinimumSize(new java.awt.Dimension(100, 100));
         b27.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        b173.setMaximumSize(new java.awt.Dimension(100, 100));
-        b173.setMinimumSize(new java.awt.Dimension(100, 100));
-        b173.setPreferredSize(new java.awt.Dimension(100, 100));
+        b17.setMaximumSize(new java.awt.Dimension(100, 100));
+        b17.setMinimumSize(new java.awt.Dimension(100, 100));
+        b17.setPreferredSize(new java.awt.Dimension(100, 100));
 
         b07.setBackground(new java.awt.Color(0, 0, 0));
         b07.setMaximumSize(new java.awt.Dimension(100, 100));
         b07.setMinimumSize(new java.awt.Dimension(100, 100));
         b07.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        b00.setName("b00");
+        b01.setName("b01");
+        b02.setName("b02");
+        b03.setName("b03");
+        b04.setName("b04");
+        b05.setName("b05");
+        b06.setName("b06");
+        b07.setName("b07");
+        
+        b10.setName("b10");
+        b11.setName("b11");
+        b12.setName("b12");
+        b13.setName("b13");
+        b14.setName("b14");
+        b15.setName("b15");
+        b16.setName("b16");
+        b17.setName("b17");
+        
+        b20.setName("b20");
+        b21.setName("b21");
+        b22.setName("b22");
+        b23.setName("b23");
+        b24.setName("b24");
+        b25.setName("b25");
+        b26.setName("b26");
+        b27.setName("b27");
+        
+        b30.setName("b30");
+        b31.setName("b31");
+        b32.setName("b32");
+        b33.setName("b33");
+        b34.setName("b34");
+        b35.setName("b35");
+        b36.setName("b36");
+        b37.setName("b37");
+        
+        b40.setName("b40");
+        b41.setName("b41");
+        b42.setName("b42");
+        b43.setName("b43");
+        b44.setName("b44");
+        b45.setName("b45");
+        b46.setName("b46");
+        b47.setName("b47");
+        
+        b50.setName("b50");
+        b51.setName("b51");
+        b52.setName("b52");
+        b53.setName("b53");
+        b54.setName("b54");
+        b55.setName("b55");
+        b56.setName("b56");
+        b57.setName("b57");
+        
+        b60.setName("b60");
+        b61.setName("b61");
+        b62.setName("b62");
+        b63.setName("b63");
+        b64.setName("b64");
+        b65.setName("b65");
+        b66.setName("b66");
+        b67.setName("b67");
+        
+        b70.setName("b70");
+        b71.setName("b71");
+        b72.setName("b72");
+        b73.setName("b73");
+        b74.setName("b74");
+        b75.setName("b75");
+        b76.setName("b76");
+        b77.setName("b77");         
+        
         jLabel9.setText("1");
 
         jLabel11.setText("2");
@@ -621,7 +696,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(b27, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(b07, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(b173, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(b17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(b30, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -653,7 +728,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(b46, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(b473, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(b47, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(b50, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -705,7 +780,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b01, b02, b03, b04, b05, b06, b07, b12, b13, b14, b15, b16, b173, b21, b22, b23, b24, b25, b26, b27, b31, b32, b33, b34, b35, b36, b37, b41, b42, b43, b44, b45, b46, b473, b51, b52, b53, b54, b55, b56, b57, b61, b62, b63, b64, b65, b66, b67, b71, b72, b73, b74, b75, b76, b77});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b01, b02, b03, b04, b05, b06, b07, b12, b13, b14, b15, b16, b17, b21, b22, b23, b24, b25, b26, b27, b31, b32, b33, b34, b35, b36, b37, b41, b42, b43, b44, b45, b46, b47, b51, b52, b53, b54, b55, b56, b57, b61, b62, b63, b64, b65, b66, b67, b71, b72, b73, b74, b75, b76, b77});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b00, b10, b11, b20, b30, b40, b50, b60, b70});
 
@@ -737,7 +812,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                             .addComponent(b07, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(b173, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(b12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(b11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(b10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -768,7 +843,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                             .addComponent(b33, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(b473, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b47, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(b42, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(b41, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -831,7 +906,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b01, b02, b03, b04, b05, b06, b07, b12, b13, b14, b15, b16, b173, b21, b22, b23, b24, b25, b26, b27, b31, b32, b33, b34, b35, b36, b37, b41, b42, b43, b44, b45, b46, b473, b51, b52, b53, b54, b55, b56, b57, b61, b62, b63, b64, b65, b66, b67, b71, b72, b73, b74, b75, b76, b77});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b01, b02, b03, b04, b05, b06, b07, b12, b13, b14, b15, b16, b17, b21, b22, b23, b24, b25, b26, b27, b31, b32, b33, b34, b35, b36, b37, b41, b42, b43, b44, b45, b46, b47, b51, b52, b53, b54, b55, b56, b57, b61, b62, b63, b64, b65, b66, b67, b71, b72, b73, b74, b75, b76, b77});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b00, b10, b11, b20, b30, b40, b50, b60, b70});
 
@@ -860,11 +935,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jLabel7.setText("Branca");
 
         jLabel8.setText("Preta");
-
-        jLabel10.setText("Turno:");
-
-        textTurno.setEnabled(false);
-        textTurno.setFocusable(false);
 
         textJ1.setEnabled(false);
 
@@ -908,13 +978,9 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textJ1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel10))
+                        .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textTurno)
-                            .addComponent(textStatus))))
+                        .addComponent(textStatus)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -924,10 +990,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(textTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -960,8 +1022,14 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Controles"));
+        jPanel3.setMaximumSize(new java.awt.Dimension(100, 100));
 
         bConectar.setText("Conectar");
+        bConectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConectarActionPerformed(evt);
+            }
+        });
 
         bDesconectar.setText("Desconectar");
 
@@ -969,17 +1037,25 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         bEncerrar.setText("Encerrar partida");
 
+        messageText.setEditable(false);
+        messageText.setColumns(20);
+        messageText.setRows(5);
+        messageText.setAutoscrolls(false);
+        messageText.setEnabled(false);
+        jScrollPane1.setViewportView(messageText);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEncerrar)
-                    .addComponent(bNovoJogo)
-                    .addComponent(bDesconectar))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(bConectar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(bEncerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bNovoJogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bDesconectar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -996,7 +1072,9 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addComponent(bNovoJogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bEncerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bConectar, bDesconectar, bEncerrar, bNovoJogo});
@@ -1026,12 +1104,21 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>                        
+
+    private void ClickInterface(java.awt.event.ActionEvent evt) {                                
+        
+    }                               
+
+    private void bConectarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+    }                                         
 
     /**
      * @param args the command line arguments
@@ -1085,7 +1172,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JButton b14;
     private javax.swing.JButton b15;
     private javax.swing.JButton b16;
-    private javax.swing.JButton b173;
+    private javax.swing.JButton b17;
     private javax.swing.JButton b20;
     private javax.swing.JButton b21;
     private javax.swing.JButton b22;
@@ -1109,7 +1196,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JButton b44;
     private javax.swing.JButton b45;
     private javax.swing.JButton b46;
-    private javax.swing.JButton b473;
+    private javax.swing.JButton b47;
     private javax.swing.JButton b50;
     private javax.swing.JButton b51;
     private javax.swing.JButton b52;
@@ -1139,7 +1226,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JButton bEncerrar;
     private javax.swing.JButton bNovoJogo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1169,12 +1255,14 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea messageText;
     private javax.swing.JTextField textJ1;
     private javax.swing.JTextField textJ2;
     private javax.swing.JTextField textStatus;
-    private javax.swing.JTextField textTurno;
-    private javax.swing.JTextField textWin1;    
+    private javax.swing.JTextField textWin1;
     private javax.swing.JTextField textWin2;
+    // End of variables declaration                   
 }

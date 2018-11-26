@@ -124,8 +124,6 @@ public class ITabuleiro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel10 = new javax.swing.JLabel();
-        textTurno = new javax.swing.JTextField();
         textJ1 = new javax.swing.JTextField();
         textJ2 = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
@@ -135,6 +133,8 @@ public class ITabuleiro extends javax.swing.JFrame {
         bDesconectar = new javax.swing.JButton();
         bNovoJogo = new javax.swing.JButton();
         bEncerrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messageText = new javax.swing.JTextArea();
         jLabel26 = new javax.swing.JLabel();
 
         jLabel25.setText("jLabel9");
@@ -805,11 +805,6 @@ public class ITabuleiro extends javax.swing.JFrame {
 
         jLabel8.setText("Preta");
 
-        jLabel10.setText("Turno:");
-
-        textTurno.setEnabled(false);
-        textTurno.setFocusable(false);
-
         textJ1.setEnabled(false);
 
         textJ2.setEnabled(false);
@@ -852,13 +847,9 @@ public class ITabuleiro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textJ1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel10))
+                        .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textTurno)
-                            .addComponent(textStatus))))
+                        .addComponent(textStatus)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -868,10 +859,6 @@ public class ITabuleiro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(textTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -904,6 +891,7 @@ public class ITabuleiro extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Controles"));
+        jPanel3.setMaximumSize(new java.awt.Dimension(100, 100));
 
         bConectar.setText("Conectar");
         bConectar.addActionListener(new java.awt.event.ActionListener() {
@@ -918,17 +906,25 @@ public class ITabuleiro extends javax.swing.JFrame {
 
         bEncerrar.setText("Encerrar partida");
 
+        messageText.setEditable(false);
+        messageText.setColumns(20);
+        messageText.setRows(5);
+        messageText.setAutoscrolls(false);
+        messageText.setEnabled(false);
+        jScrollPane1.setViewportView(messageText);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEncerrar)
-                    .addComponent(bNovoJogo)
-                    .addComponent(bDesconectar))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(bConectar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(bEncerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bNovoJogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bDesconectar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -945,7 +941,9 @@ public class ITabuleiro extends javax.swing.JFrame {
                 .addComponent(bNovoJogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bEncerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bConectar, bDesconectar, bEncerrar, bNovoJogo});
@@ -975,20 +973,21 @@ public class ITabuleiro extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConectarActionPerformed
-        
-    }//GEN-LAST:event_bConectarActionPerformed
-
     private void ClickInterface(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClickInterface
         
     }//GEN-LAST:event_ClickInterface
+
+    private void bConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConectarActionPerformed
+
+    }//GEN-LAST:event_bConectarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1096,7 +1095,6 @@ public class ITabuleiro extends javax.swing.JFrame {
     private javax.swing.JButton bEncerrar;
     private javax.swing.JButton bNovoJogo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1126,12 +1124,13 @@ public class ITabuleiro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea messageText;
     private javax.swing.JTextField textJ1;
     private javax.swing.JTextField textJ2;
     private javax.swing.JTextField textStatus;
-    private javax.swing.JTextField textTurno;
     private javax.swing.JTextField textWin1;
     private javax.swing.JTextField textWin2;
     // End of variables declaration//GEN-END:variables

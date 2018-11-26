@@ -5,6 +5,8 @@
  */
 package Model;
 
+import View.InterfaceTabuleiro;
+
 /**
  *
  * @author Lucas
@@ -16,7 +18,8 @@ public class Tabuleiro {
     private Posicao posicoes[][] = new Posicao[8][8];
     private boolean conectado;
     private boolean partidaEmAndamento;
-
+    
+    
     public Tabuleiro() {
         
     }
@@ -34,6 +37,10 @@ public class Tabuleiro {
 
     public boolean informarConectado() {
         return conectado;
+    }
+    
+    public Cavalo getJogadorDaVez() {
+        return jogador1.informarDaVez() ? jogador1 : jogador2;
     }
 
     public void setConectado(boolean conectado) {
@@ -53,6 +60,23 @@ public class Tabuleiro {
     }
     
     public int click(int linha, int coluna) {
+        if (!partidaEmAndamento)
+            return 4;        
+        
+        Posicao pos = getPosicao(linha, coluna);
+        
+        Cavalo jogador = getJogadorDaVez();
+        
+        if (!jogador.informarDaVez()) 
+            return 1;
+        
+        if (validarMovimento(pos, jogador)){
+            if (verificarVencedor())
+                return 3;            
+            return 0;
+        }
+         
+                
         return 0;
     }
     
@@ -82,23 +106,22 @@ public class Tabuleiro {
     public boolean verificarVencedor() {                
         return false;
     }
-    
-    public boolean verificarPerdeu() {        
-        return false;
-    }
-    
+        
     public void passarTurno() {        
     }   
     
-    public void ativarPosicoesIniciais() {        
+    public void ativarPosicoesIniciais() {  
+        resetarPosicoes();
+        posicoes[0][4].setOcupacao(jogador2.informarCor());
+        posicoes[7][4].setOcupacao(jogador1.informarCor());   
+        
     }
     
     public boolean verificarDisponivel(Posicao posicao) {
         return posicao.informarOcupante() == 0;        
     }
-
     
-    public boolean validarMovimento(Posicao posicao) {
+    public boolean validarMovimento(Posicao posicao, Cavalo jogador) {
         return true;
     }
     
@@ -111,7 +134,13 @@ public class Tabuleiro {
     }
     
     public void novoJogo(String idJogador1, String idJogador2) {
-        
+        if (!this.partidaEmAndamento && conectado) {
+            jogador1 = new Cavalo(idJogador1, 0);
+            jogador2 = new Cavalo(idJogador2, 1);        
+            setEmAndamento(true);
+            
+            ativarPosicoesIniciais();
+        }
     }    
     
     public void fechar() {
