@@ -9,7 +9,7 @@ package Model;
  *
  * @author Lucas
  */
-class Posicao {
+public class Posicao {
     
     private int linha;
     private int coluna;

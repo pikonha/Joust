@@ -20,6 +20,9 @@ public class Cavalo {
         this.idJogador = nome;
         this.vencedor = false;
         this.daVez = false;
+        this.cor = cor;
+        if (cor == 1)
+            this.daVez = true;
     }      
     
     public void assumirVencedor() {

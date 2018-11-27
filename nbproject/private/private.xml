@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lucas/Desktop/Joust/src/View/ITabuleiro.java</file>
-            <file>file:/C:/Users/Lucas/Desktop/Joust/src/Model/Posicao.java</file>
+            <file>file:/C:/Users/Lucas/Desktop/Joust/src/rede/Lance.java</file>
             <file>file:/C:/Users/Lucas/Desktop/Joust/src/Model/Tabuleiro.java</file>
-            <file>file:/C:/Users/Lucas/Desktop/Joust/src/Model/Main.java</file>
+            <file>file:/C:/Users/Lucas/Desktop/Joust/src/Model/AtorJoust.java</file>
+            <file>file:/C:/Users/Lucas/Desktop/Joust/src/rede/AtorRede.java</file>
             <file>file:/C:/Users/Lucas/Desktop/Joust/src/View/InterfaceTabuleiro.java</file>
         </group>
     </open-files>

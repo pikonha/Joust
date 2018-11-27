@@ -11,24 +11,34 @@ import View.InterfaceTabuleiro;
  *
  * @author Lucas
  */
-public class Tabuleiro {
+public class Tabuleiro {    
     
     private Cavalo jogador1;
     private Cavalo jogador2;
-    private Posicao posicoes[][] = new Posicao[8][8];
+    private Posicao posicoes[][];
     private boolean conectado;
     private boolean partidaEmAndamento;
-    
-    
+
     public Tabuleiro() {
-        
+        for (int i = 0; i < posicoes.length; ++i) {
+            for (int j = 0; j < posicoes.length; ++j) {
+                posicoes[i][j] = new Posicao(i, j);
+            }
+        }
     }
     
-    public Tabuleiro(Cavalo jogador1, Cavalo jogador2, boolean conectado, boolean partidaEmAndamento) {
+    public Tabuleiro(Cavalo jogador1, Cavalo jogador2) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
-        this.conectado = conectado;
-        this.partidaEmAndamento = partidaEmAndamento;
+        this.conectado = false;
+        this.partidaEmAndamento = false;        
+        this.posicoes = new Posicao[8][8];
+        
+        for (int i = 0; i < posicoes.length; ++i) {
+            for (int j = 0; j < posicoes.length; ++j) {
+                posicoes[i][j] = new Posicao(i, j);
+            }
+        }
     }
  
     public Cavalo informarJogador(int idJogador) {
@@ -37,6 +47,14 @@ public class Tabuleiro {
 
     public boolean informarConectado() {
         return conectado;
+    }
+    
+    public void setJogador1(Cavalo jogador1) {
+        this.jogador1 = jogador1;
+    }
+
+    public void setJogador2(Cavalo jogador2) {
+        this.jogador2 = jogador2;
     }
     
     public Cavalo getJogadorDaVez() {
@@ -113,9 +131,9 @@ public class Tabuleiro {
     public void ativarPosicoesIniciais() {  
         resetarPosicoes();
         posicoes[0][4].setOcupacao(jogador2.informarCor());
-        posicoes[7][4].setOcupacao(jogador1.informarCor());   
-        
-    }
+        posicoes[7][3].setOcupacao(jogador1.informarCor());   
+    
+   }
     
     public boolean verificarDisponivel(Posicao posicao) {
         return posicao.informarOcupante() == 0;        
@@ -133,14 +151,21 @@ public class Tabuleiro {
         
     }
     
-    public void novoJogo(String idJogador1, String idJogador2) {
-        if (!this.partidaEmAndamento && conectado) {
-            jogador1 = new Cavalo(idJogador1, 0);
-            jogador2 = new Cavalo(idJogador2, 1);        
+    public ImagemTabuleiro novoJogo() {
+        conectado = true;        
+        partidaEmAndamento = false;
+        
+        if (!this.partidaEmAndamento && this.conectado) {      
             setEmAndamento(true);
             
             ativarPosicoesIniciais();
+            
+            return new ImagemTabuleiro(this.posicoes, "Partida em andamento",
+                jogador1.informarId(), jogador2.informarId(), "Partida iniciada");
         }
+        
+        return new ImagemTabuleiro(this.posicoes, "Partida em andamento",
+            jogador1.informarId(), jogador2.informarId(), "Partida em andamento");
     }    
     
     public void fechar() {

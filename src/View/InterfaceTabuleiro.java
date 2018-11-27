@@ -5,13 +5,21 @@
  */
 package View;
 
+import Model.ImagemTabuleiro;
 import Model.Tabuleiro;
+import Model.Posicao;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -59,8 +67,9 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 });
             }
         }
-    }
+    }   
     
+ 
     
     private void clickInterface(ActionEvent evt) {     
         String name = ((JButton)evt.getSource()).getName();
@@ -68,7 +77,16 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         int linha = Integer.parseInt(name.substring(1, 2));
         int coluna = Integer.parseInt(name.substring(2, 3));
         
-        tabuleiro.click(linha, coluna);
+        int status = tabuleiro.click(linha, coluna);
+        switch(status){
+            case 0: System.out.println("Passa a vez e vai para a casa -> [" +linha +", " +coluna +"]");break;
+            case 1: System.out.println("Não é a sua vez!");break;
+            case 2: break;
+            case 3: break;
+            case 4: System.out.println("Não há partidas em andamento");break;
+            default: System.out.println("Deu ruim!");
+                    break;
+        }
     }
     
     public void clickConectar(ActionEvent evt) {
@@ -83,11 +101,88 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         tabuleiro.fechar();
     }
     
-    public void clickNovoJogo(ActionEvent evt) {
-        tabuleiro.novoJogo("jogador1", "jogador2");
-    }     
     
-   private void initComponents() {
+    public JButton getNovoJogo() {
+        return bNovoJogo;
+    }
+    
+    public void clickNovoJogo(ActionEvent evt) {        
+//        if (!tabuleiro.informarConectado()) {
+//            JOptionPane.showMessageDialog(rootPane, "Você deve estar conectado");
+//            return;
+//        }
+
+
+        String name = showNovoJogoDialog();
+        
+//        ImagemTabuleiro imagem = tabuleiro.novoJogo(name, "jogador2");
+        
+        textJ1.setText(imagem.getIdJogador1());
+        textJ2.setText(imagem.getIdJogador2());
+        messageText.setText(imagem.getMessage());        
+        
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {                               
+                int ocupante = imagem.getPosicao(i, j).informarOcupante();
+                
+                JButton button = getButton(i, j);      
+                
+                if (button != null) {
+                    switch (ocupante) {
+                        case 0: break;
+                        case 1:
+                            try {
+                                Image img = ImageIO.read(getClass().getResource("bcavalo.png"));
+                                button.setIcon(new ImageIcon(img));
+                            } catch (Exception ex) {
+                              System.out.println(ex);
+                            }
+                            break;
+                        case 2: 
+                            try {
+                                Image img = ImageIO.read(getClass().getResource("pcavalo.png"));
+                                button.setIcon(new ImageIcon(img));
+                            } catch (Exception ex) {
+                              System.out.println(ex);
+                            }
+                            break;
+                        case 3: button.setEnabled(false); break;
+                        default: System.out.println("Deu ruim!");
+                    }
+                }   
+            }
+        }     
+    }  
+    
+    public JButton getButton(int linha, int coluna) {
+         for (Component component : jPanel1.getComponents()) {
+            if (component.getClass().equals(JButton.class)) {
+                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
+                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
+                    return (JButton)component;
+            }
+        }
+         
+        return null;
+    }
+    
+    public String showNovoJogoDialog() {
+        JTextField fieldName = new JTextField();
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Nome: "));
+        panel.add(fieldName);
+        
+        int result = JOptionPane.showConfirmDialog(null, panel, "Novo jogo",
+           JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        
+        if (result == JOptionPane.OK_OPTION)
+            return fieldName.getText();
+        
+        return "";
+    }   
+    
+    private void initComponents() {
+
         jLabel25 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         b71 = new javax.swing.JButton();
@@ -176,10 +271,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        textWin1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        textWin2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -196,6 +287,79 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         messageText = new javax.swing.JTextArea();
         jLabel26 = new javax.swing.JLabel();
 
+        b00.setName("b00");
+        b01.setName("b01");
+        b02.setName("b02");
+        b03.setName("b03");
+        b04.setName("b04");
+        b05.setName("b05");
+        b06.setName("b06");
+        b07.setName("b07");
+        
+        b10.setName("b10");
+        b11.setName("b11");
+        b12.setName("b12");
+        b13.setName("b13");
+        b14.setName("b14");
+        b15.setName("b15");
+        b16.setName("b16");
+        b17.setName("b17");
+        
+        b20.setName("b20");
+        b21.setName("b21");
+        b22.setName("b22");
+        b23.setName("b23");
+        b24.setName("b24");
+        b25.setName("b25");
+        b26.setName("b26");
+        b27.setName("b27");
+        
+        b30.setName("b30");
+        b31.setName("b31");
+        b32.setName("b32");
+        b33.setName("b33");
+        b34.setName("b34");
+        b35.setName("b35");
+        b36.setName("b36");
+        b37.setName("b37");
+        
+        b40.setName("b40");
+        b41.setName("b41");
+        b42.setName("b42");
+        b43.setName("b43");
+        b44.setName("b44");
+        b45.setName("b45");
+        b46.setName("b46");
+        b47.setName("b47");
+        
+        b50.setName("b50");
+        b51.setName("b51");
+        b52.setName("b52");
+        b53.setName("b53");
+        b54.setName("b54");
+        b55.setName("b55");
+        b56.setName("b56");
+        b57.setName("b57");
+        
+        b60.setName("b60");
+        b61.setName("b61");
+        b62.setName("b62");
+        b63.setName("b63");
+        b64.setName("b64");
+        b65.setName("b65");
+        b66.setName("b66");
+        b67.setName("b67");
+        
+        b70.setName("b70");
+        b71.setName("b71");
+        b72.setName("b72");
+        b73.setName("b73");
+        b74.setName("b74");
+        b75.setName("b75");
+        b76.setName("b76");
+        b77.setName("b77"); 
+        
+        
         jLabel25.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -319,11 +483,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b44.setMaximumSize(new java.awt.Dimension(100, 100));
         b44.setMinimumSize(new java.awt.Dimension(100, 100));
         b44.setPreferredSize(new java.awt.Dimension(100, 100));
-        b44.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClickInterface(evt);
-            }
-        });
+
 
         b34.setBackground(new java.awt.Color(0, 0, 0));
         b34.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -438,78 +598,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         b07.setMinimumSize(new java.awt.Dimension(100, 100));
         b07.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        b00.setName("b00");
-        b01.setName("b01");
-        b02.setName("b02");
-        b03.setName("b03");
-        b04.setName("b04");
-        b05.setName("b05");
-        b06.setName("b06");
-        b07.setName("b07");
-        
-        b10.setName("b10");
-        b11.setName("b11");
-        b12.setName("b12");
-        b13.setName("b13");
-        b14.setName("b14");
-        b15.setName("b15");
-        b16.setName("b16");
-        b17.setName("b17");
-        
-        b20.setName("b20");
-        b21.setName("b21");
-        b22.setName("b22");
-        b23.setName("b23");
-        b24.setName("b24");
-        b25.setName("b25");
-        b26.setName("b26");
-        b27.setName("b27");
-        
-        b30.setName("b30");
-        b31.setName("b31");
-        b32.setName("b32");
-        b33.setName("b33");
-        b34.setName("b34");
-        b35.setName("b35");
-        b36.setName("b36");
-        b37.setName("b37");
-        
-        b40.setName("b40");
-        b41.setName("b41");
-        b42.setName("b42");
-        b43.setName("b43");
-        b44.setName("b44");
-        b45.setName("b45");
-        b46.setName("b46");
-        b47.setName("b47");
-        
-        b50.setName("b50");
-        b51.setName("b51");
-        b52.setName("b52");
-        b53.setName("b53");
-        b54.setName("b54");
-        b55.setName("b55");
-        b56.setName("b56");
-        b57.setName("b57");
-        
-        b60.setName("b60");
-        b61.setName("b61");
-        b62.setName("b62");
-        b63.setName("b63");
-        b64.setName("b64");
-        b65.setName("b65");
-        b66.setName("b66");
-        b67.setName("b67");
-        
-        b70.setName("b70");
-        b71.setName("b71");
-        b72.setName("b72");
-        b73.setName("b73");
-        b74.setName("b74");
-        b75.setName("b75");
-        b76.setName("b76");
-        b77.setName("b77");         
-        
         jLabel9.setText("1");
 
         jLabel11.setText("2");
@@ -920,18 +1008,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         jLabel4.setText("Cor:");
 
-        jLabel5.setText("Número de vitórias:");
-
-        textWin1.setEnabled(false);
-        textWin1.setFocusable(false);
-        textWin1.setHighlighter(null);
-
-        jLabel6.setText("Número de vitórias:");
-
-        textWin2.setEnabled(false);
-        textWin2.setFocusable(false);
-        textWin2.setHighlighter(null);
-
         jLabel7.setText("Branca");
 
         jLabel8.setText("Preta");
@@ -953,18 +1029,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textWin2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textWin1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1001,10 +1069,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textWin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1014,22 +1078,13 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(textWin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(31, 31, 31))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Controles"));
         jPanel3.setMaximumSize(new java.awt.Dimension(100, 100));
 
         bConectar.setText("Conectar");
-        bConectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bConectarActionPerformed(evt);
-            }
-        });
 
         bDesconectar.setText("Desconectar");
 
@@ -1101,8 +1156,8 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -1111,52 +1166,8 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
-    private void ClickInterface(java.awt.event.ActionEvent evt) {                                
-        
-    }                               
-
-    private void bConectarActionPerformed(java.awt.event.ActionEvent evt) {                                          
-
-    }                                         
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ITabuleiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ITabuleiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ITabuleiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ITabuleiro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ITabuleiro().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify                     
+                                  
+                   
     private javax.swing.JButton b00;
     private javax.swing.JButton b01;
     private javax.swing.JButton b02;
@@ -1247,8 +1258,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1262,7 +1271,5 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JTextField textJ1;
     private javax.swing.JTextField textJ2;
     private javax.swing.JTextField textStatus;
-    private javax.swing.JTextField textWin1;
-    private javax.swing.JTextField textWin2;
     // End of variables declaration                   
 }

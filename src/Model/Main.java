@@ -15,7 +15,7 @@ public class Main {
     
     public static void main(String[] args) {  
         
-       Tabuleiro tabuleiro = new Tabuleiro();
+       Tabuleiro tabuleiro = new Tabuleiro(new Cavalo("jogador 1", 0), new Cavalo("jogador 2", 1));
         
        InterfaceTabuleiro Itabuleiro = new InterfaceTabuleiro(tabuleiro);
        Itabuleiro.setVisible(true);
