@@ -6,7 +6,6 @@
 package rede;
 
 import Model.AtorJoust;
-import Model.ImagemTabuleiro;
 import br.ufsc.inf.leobr.cliente.Jogada;
 import br.ufsc.inf.leobr.cliente.OuvidorProxy;
 import br.ufsc.inf.leobr.cliente.Proxy;
@@ -42,13 +41,13 @@ public class AtorRede implements OuvidorProxy {
         try {
             proxy.conectar(servidor, nome);
         } catch (JahConectadoException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NaoPossivelConectarException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ArquivoMultiplayerException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -57,75 +56,73 @@ public class AtorRede implements OuvidorProxy {
         try {
             proxy.iniciarPartida(2);
         } catch (NaoConectadoException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void enviarJogada(ImagemTabuleiro imagemTabuleiro) {
+    public void enviarJogada(Lance lance) {
         try {
-            Lance lance = new Lance(imagemTabuleiro);
             proxy.enviaJogada(lance);
+            ehMinhaVez = false;
         } catch (NaoJogandoException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /* Recebe quando vai iniciar uma partida */
+    @Override
+    public void iniciarNovaPartida(Integer posicao) {
+        ehMinhaVez = posicao == 1;
+        
+        atorJoust.iniciarPartidaRede(ehMinhaVez);        
+    }
+    
+    @Override
+    public void receberJogada(Jogada jogada) {
+        Lance lance = (Lance)jogada;      
+        atorJoust.receberLanceRede(lance);
+        ehMinhaVez = true;  
     }
     
     public void desconectar() {
         try {
             proxy.desconectar();
         } catch (NaoConectadoException ex) {
-            JOptionPane.showMessageDialog(atorJoust.getFrame(), ex.getMessage());
+            JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    @Override
-    public void iniciarNovaPartida(Integer posicao) {
-        ehMinhaVez = posicao == 1;
-        
-        atorJoust.iniciarPartidaRede(ehMinhaVez);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String obterNomeAdversario() {
+        return proxy.obterNomeAdversario(ehMinhaVez ? 2 : 1);        
     }
 
+    public boolean ehMinhaVez() {
+        return ehMinhaVez;
+    }
+    
+
+    
+    
     @Override
     public void finalizarPartidaComErro(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(atorJoust.getInterface(), message);
     }
 
     @Override
     public void receberMensagem(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void receberJogada(Jogada jogada) {
-        Lance lance = (Lance) jogada;
-        atorJoust.receberImagemRede(lance.getImagemTabuleiro());
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        
+    }  
 
     @Override
     public void tratarConexaoPerdida() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(atorJoust.getInterface(), "A conexão com o servidor foi perdida.");
     }
 
     @Override
     public void tratarPartidaNaoIniciada(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String obterNomeAdversario() {
-        String nome = "";
-        if (ehMinhaVez) {
-            nome = proxy.obterNomeAdversario(2);
-        } else {
-            nome = proxy.obterNomeAdversario(1);
-        }
-        return nome;
-    }
-    
-    
-    
+        JOptionPane.showMessageDialog(atorJoust.getInterface(), "Não foi possível iniciar o jogo.");
+    }    
 }

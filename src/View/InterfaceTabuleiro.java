@@ -5,21 +5,17 @@
  */
 package View;
 
-import Model.ImagemTabuleiro;
-import Model.Tabuleiro;
-import Model.Posicao;
+import Model.AtorJoust;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import rede.Lance;
 
 /**
  *
@@ -27,84 +23,111 @@ import javax.swing.JTextField;
  */
 public class InterfaceTabuleiro extends javax.swing.JFrame {
     
-    Tabuleiro tabuleiro;
 
-    public InterfaceTabuleiro(Tabuleiro taubleiro) throws HeadlessException {
+    public InterfaceTabuleiro(AtorJoust joust) {
         initComponents();
-        this.tabuleiro = taubleiro;
-        
-        bConectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clickConectar(evt);
-            }
-        });
-        
-        bDesconectar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clickDesconectar(evt);
-            }
-        });
-              
-        bEncerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clickEncerrar(evt);
-            }
-        });
                     
-        bNovoJogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clickNovoJogo(evt);
-            }
-        });       
-        
+        bNovoJogo.addActionListener(new NovoJogoListener(joust));
+        bConectar.addActionListener(new ConexaoListener(joust));
+        bDesconectar.addActionListener(new DesconexaoListener(joust));
+        bEncerrar.addActionListener(new EncerrarListener(joust));
         
         for (Component component : jPanel1.getComponents()) {
-            if (component.getClass().equals(JButton.class)) {
-                ((JButton)component).addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        clickInterface(evt);
-                    }
-                });
-            }
+            if (component.getClass().equals(JButton.class))
+                ((JButton)component).addActionListener(new ClickButtonListener(joust));
         }
     }   
+    
+    public class ClickButtonListener implements ActionListener {
+        private AtorJoust joust;
+        
+        public ClickButtonListener(AtorJoust joust) {
+            this.joust = joust;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String name = ((JButton)e.getSource()).getName();
+        
+            int linha = Integer.parseInt(name.substring(1, 2));
+            int coluna = Integer.parseInt(name.substring(2, 3));
+
+            joust.novoLance(new Lance(linha, coluna, name));
+        }
+    }
+    
+    public class ConexaoListener implements ActionListener {
+        private AtorJoust joust;
+        
+        public ConexaoListener(AtorJoust joust) {
+            this.joust = joust;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            joust.conectar();
+        }
+    }
+    
+    public class DesconexaoListener implements ActionListener {
+        private AtorJoust joust;
+        
+        public DesconexaoListener(AtorJoust joust) {
+            this.joust = joust;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            joust.desconectar();
+        }
+    }
+    
+    public class NovoJogoListener implements ActionListener {
+        private AtorJoust joust;
+        
+        public NovoJogoListener(AtorJoust joust) {
+            this.joust = joust;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            joust.iniciarPartida();
+        }
+     }
+    
+    public class EncerrarListener implements ActionListener {
+        private AtorJoust joust;
+        
+        public EncerrarListener(AtorJoust joust) {
+            this.joust = joust;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            joust.encerrar();
+        }
+    }
     
  
     
     private void clickInterface(ActionEvent evt) {     
-        String name = ((JButton)evt.getSource()).getName();
-        
-        int linha = Integer.parseInt(name.substring(1, 2));
-        int coluna = Integer.parseInt(name.substring(2, 3));
-        
-        int status = tabuleiro.click(linha, coluna);
-        switch(status){
-            case 0: System.out.println("Passa a vez e vai para a casa -> [" +linha +", " +coluna +"]");break;
-            case 1: System.out.println("Não é a sua vez!");break;
-            case 2: break;
-            case 3: break;
-            case 4: System.out.println("Não há partidas em andamento");break;
-            default: System.out.println("Deu ruim!");
-                    break;
-        }
+//        String name = ((JButton)evt.getSource()).getName();
+//        
+//        int linha = Integer.parseInt(name.substring(1, 2));
+//        int coluna = Integer.parseInt(name.substring(2, 3));
+//        
+//        int status = tabuleiro.click(linha, coluna);
+//        switch(status){
+//            case 0: System.out.println("Passa a vez e vai para a casa -> [" +linha +", " +coluna +"]");break;
+//            case 1: System.out.println("Não é a sua vez!");break;
+//            case 2: break;
+//            case 3: break;
+//            case 4: System.out.println("Não há partidas em andamento");break;
+//            default: System.out.println("Deu ruim!");
+//                    break;
+//        }
     }
-    
-    public void clickConectar(ActionEvent evt) {
-        tabuleiro.conectar();
-    }
-    
-    public void clickDesconectar(ActionEvent evt) {
-        tabuleiro.desconectar();
-    }
-    
-    public void clickEncerrar(ActionEvent evt) {
-        tabuleiro.fechar();
-    }
-    
-    
-    public JButton getNovoJogo() {
-        return bNovoJogo;
-    }
+
     
     public void clickNovoJogo(ActionEvent evt) {        
 //        if (!tabuleiro.informarConectado()) {
@@ -117,51 +140,51 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         
 //        ImagemTabuleiro imagem = tabuleiro.novoJogo(name, "jogador2");
         
-        textJ1.setText(imagem.getIdJogador1());
-        textJ2.setText(imagem.getIdJogador2());
-        messageText.setText(imagem.getMessage());        
-        
-        for (int i = 0; i < 8; ++i) {
-            for (int j = 0; j < 8; ++j) {                               
-                int ocupante = imagem.getPosicao(i, j).informarOcupante();
-                
-                JButton button = getButton(i, j);      
-                
-                if (button != null) {
-                    switch (ocupante) {
-                        case 0: break;
-                        case 1:
-                            try {
-                                Image img = ImageIO.read(getClass().getResource("bcavalo.png"));
-                                button.setIcon(new ImageIcon(img));
-                            } catch (Exception ex) {
-                              System.out.println(ex);
-                            }
-                            break;
-                        case 2: 
-                            try {
-                                Image img = ImageIO.read(getClass().getResource("pcavalo.png"));
-                                button.setIcon(new ImageIcon(img));
-                            } catch (Exception ex) {
-                              System.out.println(ex);
-                            }
-                            break;
-                        case 3: button.setEnabled(false); break;
-                        default: System.out.println("Deu ruim!");
-                    }
-                }   
-            }
-        }     
+//        textJ1.setText(imagem.getIdJogador1());
+//        textJ2.setText(imagem.getIdJogador2());
+//        messageText.setText(imagem.getMessage());        
+//        
+//        for (int i = 0; i < 8; ++i) {
+//            for (int j = 0; j < 8; ++j) {                               
+//                int ocupante = imagem.getPosicao(i, j).informarOcupante();
+//                
+//                JButton button = getButton(i, j);      
+//                
+//                if (button != null) {
+//                    switch (ocupante) {
+//                        case 0: break;
+//                        case 1:
+//                            try {
+//                                Image img = ImageIO.read(getClass().getResource("bcavalo.png"));
+//                                button.setIcon(new ImageIcon(img));
+//                            } catch (Exception ex) {
+//                              System.out.println(ex);
+//                            }
+//                            break;
+//                        case 2: 
+//                            try {
+//                                Image img = ImageIO.read(getClass().getResource("pcavalo.png"));
+//                                button.setIcon(new ImageIcon(img));
+//                            } catch (Exception ex) {
+//                              System.out.println(ex);
+//                            }
+//                            break;
+//                        case 3: button.setEnabled(false); break;
+//                        default: System.out.println("Deu ruim!");
+//                    }
+//                }   
+//            }
+//        }     
     }  
     
     public JButton getButton(int linha, int coluna) {
-         for (Component component : jPanel1.getComponents()) {
-            if (component.getClass().equals(JButton.class)) {
-                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
-                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
-                    return (JButton)component;
-            }
-        }
+//         for (Component component : jPanel1.getComponents()) {
+//            if (component.getClass().equals(JButton.class)) {
+//                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
+//                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
+//                    return (JButton)component;
+//            }
+//        }
          
         return null;
     }

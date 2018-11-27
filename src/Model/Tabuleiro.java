@@ -5,13 +5,14 @@
  */
 package Model;
 
-import View.InterfaceTabuleiro;
+import rede.Lance;
+
 
 /**
  *
  * @author Lucas
  */
-public class Tabuleiro {    
+public class Tabuleiro {   
     
     private Cavalo jogador1;
     private Cavalo jogador2;
@@ -25,41 +26,32 @@ public class Tabuleiro {
                 posicoes[i][j] = new Posicao(i, j);
             }
         }
+    }      
+    
+    public void setJogador1(String idJogador) {
+        this.jogador1 = new Cavalo(idJogador, 1);
+    }
+
+    public void setJogador2(String idJogador) {
+        this.jogador2 = new Cavalo(idJogador, 2);
     }
     
-    public Tabuleiro(Cavalo jogador1, Cavalo jogador2) {
-        this.jogador1 = jogador1;
-        this.jogador2 = jogador2;
-        this.conectado = false;
-        this.partidaEmAndamento = false;        
-        this.posicoes = new Posicao[8][8];
+    public boolean trataLance(Lance lance) {
         
-        for (int i = 0; i < posicoes.length; ++i) {
-            for (int j = 0; j < posicoes.length; ++j) {
-                posicoes[i][j] = new Posicao(i, j);
-            }
-        }
-    }
- 
-    public Cavalo informarJogador(int idJogador) {
-        return idJogador == 1 ? jogador1 : jogador2;
-    }
-
-    public boolean informarConectado() {
-        return conectado;
+        return true;
     }
     
-    public void setJogador1(Cavalo jogador1) {
-        this.jogador1 = jogador1;
-    }
-
-    public void setJogador2(Cavalo jogador2) {
-        this.jogador2 = jogador2;
+    public void assumirLance(Lance lance) {
+        
+        
+        
     }
     
-    public Cavalo getJogadorDaVez() {
-        return jogador1.informarDaVez() ? jogador1 : jogador2;
-    }
+    
+    
+    
+    
+
 
     public void setConectado(boolean conectado) {
         this.conectado = conectado;
@@ -77,26 +69,26 @@ public class Tabuleiro {
         return posicoes[linha][coluna];
     }
     
-    public int click(int linha, int coluna) {
-        if (!partidaEmAndamento)
-            return 4;        
-        
-        Posicao pos = getPosicao(linha, coluna);
-        
-        Cavalo jogador = getJogadorDaVez();
-        
-        if (!jogador.informarDaVez()) 
-            return 1;
-        
-        if (validarMovimento(pos, jogador)){
-            if (verificarVencedor())
-                return 3;            
-            return 0;
-        }
-         
-                
-        return 0;
-    }
+//    public int click(int linha, int coluna) {
+//        if (!partidaEmAndamento)
+//            return 4;        
+//        
+//        Posicao pos = getPosicao(linha, coluna);
+//        
+//        Cavalo jogador = getJogadorDaVez();
+//        
+//        if (!jogador.informarDaVez()) 
+//            return 1;
+//        
+//        if (validarMovimento(pos, jogador)){
+//            if (verificarVencedor())
+//                return 3;            
+//            return 0;
+//        }
+//         
+//                
+//        return 0;
+//    }
     
     public void resetarPosicoes() {
         for (int i = 0; i < posicoes.length; ++i) {
@@ -151,23 +143,7 @@ public class Tabuleiro {
         
     }
     
-    public ImagemTabuleiro novoJogo() {
-        conectado = true;        
-        partidaEmAndamento = false;
-        
-        if (!this.partidaEmAndamento && this.conectado) {      
-            setEmAndamento(true);
-            
-            ativarPosicoesIniciais();
-            
-            return new ImagemTabuleiro(this.posicoes, "Partida em andamento",
-                jogador1.informarId(), jogador2.informarId(), "Partida iniciada");
-        }
-        
-        return new ImagemTabuleiro(this.posicoes, "Partida em andamento",
-            jogador1.informarId(), jogador2.informarId(), "Partida em andamento");
-    }    
-    
+
     public void fechar() {
         
     }

@@ -12,41 +12,39 @@ package Model;
 public class Cavalo {
     
     private String idJogador;
-    private boolean vencedor;
-    private boolean daVez;   
     private int cor;
+    private int linha;
+    private int coluna;
     
     public Cavalo(String nome, int cor){
         this.idJogador = nome;
-        this.vencedor = false;
-        this.daVez = false;
         this.cor = cor;
-        if (cor == 1)
-            this.daVez = true;
+        this.linha = this.coluna = 0;
     }      
-    
-    public void assumirVencedor() {
-        this.vencedor=true;
-    }
-    
-    public boolean informarVencedor() {
-        return this.vencedor;
-    }
 
     public String informarId() {
         return this.idJogador;
     }       
     
-    public boolean informarDaVez() {
-        return this.daVez;
-    }
-    
     public int informarCor() {
         return cor;
+    }    
+
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
+    }
+
+    public int getColuna() {
+        return coluna;
+    }
+
+    public void setColuna(int coluna) {
+        this.coluna = coluna;
     }
     
-    public void setDaVez(boolean daVez) {
-        this.daVez = daVez;
-    }
     
 }

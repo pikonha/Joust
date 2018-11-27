@@ -5,7 +5,6 @@
  */
 package rede;
 
-import Model.ImagemTabuleiro;
 import br.ufsc.inf.leobr.cliente.Jogada;
 
 /**
@@ -14,15 +13,30 @@ import br.ufsc.inf.leobr.cliente.Jogada;
  */
 public class Lance implements Jogada {
     
-    ImagemTabuleiro imagemTabuleiro;
+    int linha;
+    int coluna;
+    String idJogador;
 
-    public Lance(ImagemTabuleiro imagemTabuleiro) {
-        super();
-        this.imagemTabuleiro = imagemTabuleiro;
+    public Lance(int linha, int coluna, String idJogador) {
+        this.linha = linha;
+        this.coluna = coluna;
+        this.idJogador = idJogador;
     }
 
-    public ImagemTabuleiro getImagemTabuleiro() {
-        return imagemTabuleiro;
+    public int getLinha() {
+        return linha;
     }
+
+    public int getColuna() {
+        return coluna;
+    }
+
+    public String getIdJogador() {
+        return idJogador;
+    }
+
+    
+
+    
   
 }
