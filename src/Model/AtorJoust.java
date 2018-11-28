@@ -65,9 +65,9 @@ public class AtorJoust {
         idJogador = JOptionPane.showInputDialog(interfaceTabuleiro, "Escolha o nome do participante 1:");
         
         interfaceTabuleiro.setVisible(true);
-        interfaceTabuleiro.setStatus("Conectado");
+        interfaceTabuleiro.setStatus("Aguardando conexão");
         interfaceTabuleiro.setNomeJogador1(idJogador);
-        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");
+        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");        
         
     }
     
@@ -107,6 +107,8 @@ public class AtorJoust {
 
     public void conectar() {
         atorRede.conectar(idJogador);
+        interfaceTabuleiro.setStatus("Conectado.");
+        interfaceTabuleiro.setMessage("Conectado ao servidor. Inicie um novo jogo.");
     }
     
 

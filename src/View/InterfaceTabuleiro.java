@@ -602,6 +602,11 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         jLabel23.setText("4");
 
+        textStatus.setEditable(false);
+        
+        textJ1.setEditable(false);
+        textJ2.setEditable(false);
+        	
         b70.setBackground(java.awt.Color.black);
         b70.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         b70.setMaximumSize(new java.awt.Dimension(100, 100));

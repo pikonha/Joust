@@ -39,7 +39,7 @@ public class AtorRede implements OuvidorProxy {
     
     public void conectar(String nome) {
         try {
-            proxy.conectar("localhost:1099", nome);
+            proxy.conectar("localhost", nome);
         } catch (JahConectadoException ex) {
             JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
