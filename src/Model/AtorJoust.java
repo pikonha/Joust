@@ -47,7 +47,7 @@ public class AtorJoust {
             if (resultado == 0) {
                 atorRede.enviarJogada(lance);
             } else if (resultado == 1) {
-                interfaceTabuleiro.setMessage("PosiÃ§Ã£o invÃ¡lida.");
+                interfaceTabuleiro.setMessage("Posição inválida.");
             } if (resultado == 2) {
                 interfaceTabuleiro.informarVencedor(tabuleiro.getIdVencedor());
             } else
@@ -63,7 +63,12 @@ public class AtorJoust {
         interfaceTabuleiro = new InterfaceTabuleiro(this);
         
         idJogador = JOptionPane.showInputDialog(interfaceTabuleiro, "Escolha o nome do participante 1:");
-        atorRede.conectar(idJogador, "localhost:1099");
+        
+        interfaceTabuleiro.setVisible(true);
+        interfaceTabuleiro.setStatus("Conectado");
+        interfaceTabuleiro.setNomeJogador1(idJogador);
+        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");
+        
     }
     
     /* chamado sempre que uma partida inicia */
@@ -74,11 +79,11 @@ public class AtorJoust {
         if (comecoJogando) {
             tabuleiro.setJogador1(idJogador);
             tabuleiro.setJogador2(atorRede.obterNomeAdversario());
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "VocÃª comeÃ§a jogando.");
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "Você começa jogando.");
         } else {
             tabuleiro.setJogador1(atorRede.obterNomeAdversario());
             tabuleiro.setJogador2(idJogador);
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversÃ¡rio comeÃ§a jogando.");
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversário começa jogando.");
         }
     }
     
@@ -101,7 +106,7 @@ public class AtorJoust {
     }
 
     public void conectar() {
-        
+        atorRede.conectar(idJogador);
     }
     
 

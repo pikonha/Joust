@@ -37,9 +37,9 @@ public class AtorRede implements OuvidorProxy {
         proxy.addOuvinte(this);
     }
     
-    public void conectar(String nome, String servidor) {
+    public void conectar(String nome) {
         try {
-            proxy.conectar(servidor, nome);
+            proxy.conectar("localhost:1099", nome);
         } catch (JahConectadoException ex) {
             JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,16 +113,15 @@ public class AtorRede implements OuvidorProxy {
 
     @Override
     public void receberMensagem(String msg) {
-        
     }  
 
     @Override
     public void tratarConexaoPerdida() {
-        JOptionPane.showMessageDialog(atorJoust.getInterface(), "A conex√£o com o servidor foi perdida.");
+        JOptionPane.showMessageDialog(atorJoust.getInterface(), "A conex„o com o servidor foi perdida.");
     }
 
     @Override
     public void tratarPartidaNaoIniciada(String message) {
-        JOptionPane.showMessageDialog(atorJoust.getInterface(), "N√£o foi poss√≠vel iniciar o jogo.");
+        JOptionPane.showMessageDialog(atorJoust.getInterface(), "N„o foi possÌvel iniciar o jogo.");
     }    
 }

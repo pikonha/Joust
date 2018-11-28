@@ -116,75 +116,20 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         }
     }
     
- 
+	public void setStatus(String status) {
+		textStatus.setText(status);		
+	}
     
-    private void clickInterface(ActionEvent evt) {     
-//        String name = ((JButton)evt.getSource()).getName();
-//        
-//        int linha = Integer.parseInt(name.substring(1, 2));
-//        int coluna = Integer.parseInt(name.substring(2, 3));
-//        
-//        int status = tabuleiro.click(linha, coluna);
-//        switch(status){
-//            case 0: System.out.println("Passa a vez e vai para a casa -> [" +linha +", " +coluna +"]");break;
-//            case 1: System.out.println("Não é a sua vez!");break;
-//            case 2: break;
-//            case 3: break;
-//            case 4: System.out.println("Não há partidas em andamento");break;
-//            default: System.out.println("Deu ruim!");
-//                    break;
-//        }
-    }
-
-    
-    public void clickNovoJogo(ActionEvent evt) {        
-//        if (!tabuleiro.informarConectado()) {
-//            JOptionPane.showMessageDialog(rootPane, "Você deve estar conectado");
-//            return;
-//        }
+	public void setNomeJogador1(String idJogador) {
+		textJ1.setText(idJogador);		
+	}
+	
+	public void setNomeJogador2(String idJogador) {
+		textJ2.setText(idJogador);		
+	}
 
 
-        String name = showNovoJogoDialog();
-        
-//        ImagemTabuleiro imagem = tabuleiro.novoJogo(name, "jogador2");
-        
-//        textJ1.setText(imagem.getIdJogador1());
-//        textJ2.setText(imagem.getIdJogador2());
-//        messageText.setText(imagem.getMessage());        
-//        
-//        for (int i = 0; i < 8; ++i) {
-//            for (int j = 0; j < 8; ++j) {                               
-//                int ocupante = imagem.getPosicao(i, j).informarOcupante();
-//                
-//                JButton button = getButton(i, j);      
-//                
-//                if (button != null) {
-//                    switch (ocupante) {
-//                        case 0: break;
-//                        case 1:
-//                            try {
-//                                Image img = ImageIO.read(getClass().getResource("bcavalo.png"));
-//                                button.setIcon(new ImageIcon(img));
-//                            } catch (Exception ex) {
-//                              System.out.println(ex);
-//                            }
-//                            break;
-//                        case 2: 
-//                            try {
-//                                Image img = ImageIO.read(getClass().getResource("pcavalo.png"));
-//                                button.setIcon(new ImageIcon(img));
-//                            } catch (Exception ex) {
-//                              System.out.println(ex);
-//                            }
-//                            break;
-//                        case 3: button.setEnabled(false); break;
-//                        default: System.out.println("Deu ruim!");
-//                    }
-//                }   
-//            }
-//        }     
-    }  
-    
+
     public JButton getButton(int linha, int coluna) {
 //         for (Component component : jPanel1.getComponents()) {
 //            if (component.getClass().equals(JButton.class)) {
@@ -197,20 +142,20 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         return null;
     }
     
-    public String showNovoJogoDialog() {
-        JTextField fieldName = new JTextField();
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(new JLabel("Nome: "));
-        panel.add(fieldName);
-        
-        int result = JOptionPane.showConfirmDialog(null, panel, "Novo jogo",
-           JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        
-        if (result == JOptionPane.OK_OPTION)
-            return fieldName.getText();
-        
-        return "";
-    }   
+//    public String showNovoJogoDialog() {
+//        JTextField fieldName = new JTextField();
+//        JPanel panel = new JPanel(new GridLayout(0, 1));
+//        panel.add(new JLabel("Nome: "));
+//        panel.add(fieldName);
+//        
+//        int result = JOptionPane.showConfirmDialog(null, panel, "Novo jogo",
+//           JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+//        
+//        if (result == JOptionPane.OK_OPTION)
+//            return fieldName.getText();
+//        
+//        return "";
+//    }   
     
     private void initComponents() {
 
@@ -1043,13 +988,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
         jLabel8.setText("Preta");
 
-        textJ1.setEnabled(false);
-
-        textJ2.setEnabled(false);
-
         jLabel28.setText("Status:");
-
-        textStatus.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1127,7 +1066,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         messageText.setColumns(20);
         messageText.setRows(5);
         messageText.setAutoscrolls(false);
-        messageText.setEnabled(false);
         jScrollPane1.setViewportView(messageText);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1303,4 +1241,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JTextField textJ2;
     private javax.swing.JTextField textStatus;
     // End of variables declaration                   
+
+
 }
