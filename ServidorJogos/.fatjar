@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Aug 28 22:09:23 BRT 2008
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=false
+onejar.checkbox=false
+jarname=servidor.jar
+manifest.mergeall=false
+manifest.mainclass=br.ufsc.inf.leobr.servidor.ServidorMain
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=<po|ServidorJogos>~CVS/
+includes=

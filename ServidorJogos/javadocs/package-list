@@ -1,0 +1,8 @@
+com.retrogui.dualrpc.client
+com.retrogui.dualrpc.client.net
+com.retrogui.dualrpc.common
+com.retrogui.dualrpc.server
+com.retrogui.dualrpc.server.net
+com.retrogui.messageserver.client
+com.retrogui.messageserver.common
+com.retrogui.messageserver.server
