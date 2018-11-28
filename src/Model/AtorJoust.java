@@ -97,7 +97,7 @@ public class AtorJoust {
             tabuleiro.setJogador1(jogador);
             tabuleiro.setJogador2(new Cavalo(nomeAdversario, 2, 7, 3));
             
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "Você começa jogando. Sua cor é a: branca." );
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "Você começa jogando. Sua cor é a: preta." );
             
             interfaceTabuleiro.setNomeJogador1(jogador.informarId());
             interfaceTabuleiro.setNomeJogador2(nomeAdversario);
@@ -114,7 +114,7 @@ public class AtorJoust {
             tabuleiro.setJogador1(new Cavalo(atorRede.obterNomeAdversario(), 1, 0, 4));
             tabuleiro.setJogador2(jogador);
             
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversário começa jogando. Sua cor é a: preta.");
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversário começa jogando. Sua cor é a: branca.");
             
             interfaceTabuleiro.setNomeJogador1(nomeAdversario);
             interfaceTabuleiro.setNomeJogador2(jogador.informarId());
