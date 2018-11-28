@@ -100,8 +100,7 @@ public class Tabuleiro {
         partidaEmAndamento = false;
     }
     
-    public boolean verificarVencedor() {     
-        
+    public boolean verificarVencedor() {             
         
         return false;
     }
@@ -109,7 +108,8 @@ public class Tabuleiro {
     public void ativarPosicoesIniciais() {  
         resetarPosicoes();
         posicoes[0][4].setOcupacao(jogador2.informarCor());
-        posicoes[7][3].setOcupacao(jogador1.informarCor());       
+        posicoes[7][3].setOcupacao(jogador1.informarCor()); 
+        
    }
 
     public String getIdVencedor() {

@@ -39,7 +39,7 @@ public class AtorJoust {
             int resultado = tabuleiro.trataLance(lance);
             
             if (resultado == 0) {
-                atorRede.enviarJogada(lance);
+                atorRede.enviarJogada(new Lance(lance.getLinha(), lance.getColuna(), jogador.getLinha(), jogador.getColuna(), lance.getIdJogador()));
                 
                 interfaceTabuleiro.desativaPosicao(jogador.getLinha(), jogador.getColuna());
                 
@@ -65,7 +65,7 @@ public class AtorJoust {
     public void receberLanceRede(Lance lance) {
         tabuleiro.assumirLance(lance);        
         
-        
+        interfaceTabuleiro.desativaPosicao(lance.blinha, lance.bcoluna);
         interfaceTabuleiro.setPosicaoJogador(jogador.informarCor() == 1 ? 2 : 1, lance.getLinha(), lance.getColuna());
     }
 

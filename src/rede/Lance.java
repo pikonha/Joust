@@ -14,6 +14,8 @@ import br.ufsc.inf.leobr.cliente.Jogada;
  */
 public class Lance implements Jogada {
     
+	public int blinha;
+	public int bcoluna;	
     private int linha;
     private int coluna;
     private String idJogador;
@@ -30,6 +32,14 @@ public class Lance implements Jogada {
         this.coluna = coluna;
         this.idJogador = idJogador;       
         this.vencedor = vencedor;
+    }
+    
+    public Lance(int Alinha, int Acoluna, int Blinha, int Bcoluna, String idJogador) {
+        this.linha = Alinha;
+        this.coluna = Acoluna;
+        this.idJogador = idJogador;          
+        this.bcoluna = Bcoluna;
+        this.blinha = Blinha;
     }
     
 

@@ -135,7 +135,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
 	public void setPosicaoJogador(int corJogador, int linha, int coluna) {
 		JButton posicao = getButton(linha, coluna);
-		
+				
 		Image img = null;		
 		
 		try {
