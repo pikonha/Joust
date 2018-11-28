@@ -42,8 +42,14 @@ public class AtorJoust {
     
     public void novoLance(Lance lance) {
         if (atorRede.ehMinhaVez()){
-            if (tabuleiro.trataLance(lance)) {
+            int resultado = tabuleiro.trataLance(lance);
+            
+            if (resultado == 0) {
                 atorRede.enviarJogada(lance);
+            } else if (resultado == 1) {
+                interfaceTabuleiro.setMessage("Posição inválida.");
+            } if (resultado == 2) {
+                interfaceTabuleiro.informarVencedor(tabuleiro.getIdVencedor());
             } else
                 JOptionPane.showMessageDialog(interfaceTabuleiro, "Ocorreu um erro no tratamento de lance.");
         }  

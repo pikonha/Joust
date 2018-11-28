@@ -15,13 +15,23 @@ public class Cavalo {
     private int cor;
     private int linha;
     private int coluna;
+    private boolean vencedor;
     
     public Cavalo(String nome, int cor){
         this.idJogador = nome;
         this.cor = cor;
         this.linha = this.coluna = -1;
+        this.vencedor = false;
     }      
 
+    public boolean isVencedor() {
+        return vencedor;
+    }
+
+    public void setVencedor(boolean vencedor) {
+        this.vencedor = vencedor;
+    } 
+    
     public String informarId() {
         return this.idJogador;
     }       

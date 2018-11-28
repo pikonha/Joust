@@ -36,23 +36,43 @@ public class Tabuleiro {
         this.jogador2 = new Cavalo(idJogador, 2);
     }
     
-    public boolean trataLance(Lance lance) {
+    public int trataLance(Lance lance) {
+        Cavalo jogador = getJogador(lance.getIdJogador());
         
-        return true;
+        if (validaPosicaoDestino(jogador.getLinha(), jogador.getColuna(),
+                                lance.getLinha(), lance.getColuna())) {
+            return verificarVencedor() ? 2 : 0;
+        }
+        
+        return 1;
     }
     
     public void assumirLance(Lance lance) {
+        Cavalo jogador = getJogador(lance.getIdJogador());
         
-        
-        
+        getPosicao(jogador.getLinha(), jogador.getColuna()).desativar();
+        getPosicao(lance.getLinha(), lance.getColuna()).setOcupacao(jogador.informarCor());
     }
     
+    public Cavalo getJogador(String idJogador) {
+        return jogador1.informarId() == idJogador ? jogador1 : jogador2;
+    }
     
-    
-    
-    
-
-
+    public boolean validaPosicaoDestino(int linhaAtual, int colunaAtual, int linhaDest, int colunaDest) {
+        int linha = linhaAtual - linhaDest;
+        int coluna = colunaAtual - colunaDest;
+        
+        if (linha >= -2 && linha != 0 && linha <= 2
+                && coluna >= -2 && coluna != 0 && coluna <= 2)
+            return true;
+        else {
+            linha = linhaAtual + linhaDest;
+            coluna = colunaAtual + colunaDest; 
+            
+            return linha >= -2 && linha != 0 && linha <= 2
+                && coluna >= -2 && coluna != 0 && coluna <= 2;
+        }
+    }
     public void setConectado(boolean conectado) {
         this.conectado = conectado;
     }
@@ -69,27 +89,6 @@ public class Tabuleiro {
         return posicoes[linha][coluna];
     }
     
-//    public int click(int linha, int coluna) {
-//        if (!partidaEmAndamento)
-//            return 4;        
-//        
-//        Posicao pos = getPosicao(linha, coluna);
-//        
-//        Cavalo jogador = getJogadorDaVez();
-//        
-//        if (!jogador.informarDaVez()) 
-//            return 1;
-//        
-//        if (validarMovimento(pos, jogador)){
-//            if (verificarVencedor())
-//                return 3;            
-//            return 0;
-//        }
-//         
-//                
-//        return 0;
-//    }
-    
     public void resetarPosicoes() {
         for (int i = 0; i < posicoes.length; ++i) {
             for (int j = 0; j < posicoes.length; ++j) {
@@ -98,46 +97,25 @@ public class Tabuleiro {
         }
     }
     
-    public void setOcupacao(Posicao posicao, int ocupacao) {
-        posicao.setOcupacao(ocupacao);
-    }
       
     public void terminarPartida() {
         partidaEmAndamento = false;
     }
     
-    public boolean verificarVencedor() {                
+    public boolean verificarVencedor() {     
+        
+        
         return false;
     }
-        
-    public void passarTurno() {        
-    }   
-    
+
     public void ativarPosicoesIniciais() {  
         resetarPosicoes();
         posicoes[0][4].setOcupacao(jogador2.informarCor());
-        posicoes[7][3].setOcupacao(jogador1.informarCor());   
-    
+        posicoes[7][3].setOcupacao(jogador1.informarCor());       
    }
-    
-    public boolean verificarDisponivel(Posicao posicao) {
-        return posicao.informarOcupante() == 0;        
-    }
-    
-    public boolean validarMovimento(Posicao posicao, Cavalo jogador) {
-        return true;
-    }
-    
-    public boolean conectar() {
-        return true;
-    }
-    
-    public void desconectar() {
-        
-    }
-    
 
-    public void fechar() {
-        
+    public String getIdVencedor() {
+        return jogador1.isVencedor() ? jogador1.informarId() : jogador2.informarId();
     }
+ 
 }

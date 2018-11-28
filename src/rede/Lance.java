@@ -5,6 +5,7 @@
  */
 package rede;
 
+import Model.Cavalo;
 import br.ufsc.inf.leobr.cliente.Jogada;
 
 /**
@@ -13,15 +14,24 @@ import br.ufsc.inf.leobr.cliente.Jogada;
  */
 public class Lance implements Jogada {
     
-    int linha;
-    int coluna;
-    String idJogador;
+    private int linha;
+    private int coluna;
+    private String idJogador;
+    private String vencedor = "";
 
     public Lance(int linha, int coluna, String idJogador) {
         this.linha = linha;
         this.coluna = coluna;
-        this.idJogador = idJogador;
+        this.idJogador = idJogador;       
     }
+    
+    public Lance(int linha, int coluna, String idJogador, String vencedor) {
+        this.linha = linha;
+        this.coluna = coluna;
+        this.idJogador = idJogador;       
+        this.vencedor = vencedor;
+    }
+    
 
     public int getLinha() {
         return linha;
@@ -34,5 +44,8 @@ public class Lance implements Jogada {
     public String getIdJogador() {
         return idJogador;
     }
-  
+
+    public String getVencedor() {
+        return vencedor;
+    }
 }

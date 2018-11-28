@@ -37,6 +37,14 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
                 ((JButton)component).addActionListener(new ClickButtonListener(joust));
         }
     }   
+
+    public void setMessage(String posicaoInvalida) {
+        messageText.setText(posicaoInvalida);
+    }
+
+    public void informarVencedor(String idVencedor) {
+        messageText.setText("Jogador " + idVencedor + " venceu.");
+    }
     
     public class ClickButtonListener implements ActionListener {
         private AtorJoust joust;
