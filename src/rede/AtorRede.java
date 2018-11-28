@@ -54,7 +54,8 @@ public class AtorRede implements OuvidorProxy {
     
     public void iniciarPartidaRede() {
         try {
-            proxy.iniciarPartida(2);
+            proxy.iniciarPartida(2);            
+            
         } catch (NaoConectadoException ex) {
             JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,10 +104,11 @@ public class AtorRede implements OuvidorProxy {
         return ehMinhaVez;
     }
     
+    public void setEhMinhaVez(boolean ehMinhaVez) {
+		this.ehMinhaVez = ehMinhaVez;
+	}
 
-    
-    
-    @Override
+	@Override
     public void finalizarPartidaComErro(String message) {
         JOptionPane.showMessageDialog(atorJoust.getInterface(), message);
     }
