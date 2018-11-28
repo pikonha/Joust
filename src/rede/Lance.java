@@ -34,9 +34,5 @@ public class Lance implements Jogada {
     public String getIdJogador() {
         return idJogador;
     }
-
-    
-
-    
   
 }

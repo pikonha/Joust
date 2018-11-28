@@ -101,14 +101,7 @@ public class Tabuleiro {
     public void setOcupacao(Posicao posicao, int ocupacao) {
         posicao.setOcupacao(ocupacao);
     }
-    
-    public void criarJogador(String idJogador) {
-        if (jogador1 != null) 
-            jogador1 = new Cavalo(idJogador, 1);
-        else if (jogador2 != null)
-            jogador2 = new Cavalo(idJogador, 2);            
-    }     
-    
+      
     public void terminarPartida() {
         partidaEmAndamento = false;
     }

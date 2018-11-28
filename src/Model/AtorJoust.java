@@ -57,7 +57,7 @@ public class AtorJoust {
         interfaceTabuleiro = new InterfaceTabuleiro(this);
         
         idJogador = JOptionPane.showInputDialog(interfaceTabuleiro, "Escolha o nome do participante 1:");
-        atorRede.conectar(idJogador, "localhost");
+        atorRede.conectar(idJogador, "localhost:1099");
     }
     
     /* chamado sempre que uma partida inicia */

@@ -19,7 +19,7 @@ public class Cavalo {
     public Cavalo(String nome, int cor){
         this.idJogador = nome;
         this.cor = cor;
-        this.linha = this.coluna = 0;
+        this.linha = this.coluna = -1;
     }      
 
     public String informarId() {
