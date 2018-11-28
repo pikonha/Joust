@@ -32,6 +32,10 @@ public class Posicao {
     public void esvaziar() {
         this.ocupante = 0;
     }
+    
+    public void desativar() {
+        this.ocupante = 3;
+    }
 
     public int informarOcupante() {
         return this.ocupante;
