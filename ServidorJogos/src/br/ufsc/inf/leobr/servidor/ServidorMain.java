@@ -7,6 +7,7 @@
  */
 package br.ufsc.inf.leobr.servidor;
 
+import org.apache.log4j.BasicConfigurator;
 
 public class ServidorMain {
 
