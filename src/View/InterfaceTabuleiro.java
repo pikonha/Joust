@@ -8,8 +8,13 @@ package View;
 import Model.AtorJoust;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -128,35 +133,43 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 		textJ2.setText(idJogador);		
 	}
 
+	public void setPosicaoJogador(int corJogador, int linha, int coluna) {
+		JButton posicao = getButton(linha, coluna);
+		
+		Image img = null;		
+		
+		try {
+			if (corJogador == 1) {
+				img = ImageIO.read(getClass().getResource("pcavalo.png"));
+			} else {
+				img = ImageIO.read(getClass().getResource("bcavalo.png"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		
+		posicao.setIcon(new ImageIcon(img));
+	}
 
 
     public JButton getButton(int linha, int coluna) {
-//         for (Component component : jPanel1.getComponents()) {
-//            if (component.getClass().equals(JButton.class)) {
-//                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
-//                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
-//                    return (JButton)component;
-//            }
-//        }
+         for (Component component : jPanel1.getComponents()) {
+            if (component.getClass().equals(JButton.class)) {
+                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
+                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
+                    return (JButton)component;
+            }
+        }
          
         return null;
     }
     
-//    public String showNovoJogoDialog() {
-//        JTextField fieldName = new JTextField();
-//        JPanel panel = new JPanel(new GridLayout(0, 1));
-//        panel.add(new JLabel("Nome: "));
-//        panel.add(fieldName);
-//        
-//        int result = JOptionPane.showConfirmDialog(null, panel, "Novo jogo",
-//           JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-//        
-//        if (result == JOptionPane.OK_OPTION)
-//            return fieldName.getText();
-//        
-//        return "";
-//    }   
-    
+    public void desativaPosicao(int linha, int coluna) {
+    	JButton posicao = getButton(linha, coluna);
+    	posicao.setIcon(null);
+    	posicao.setEnabled(false);
+    }
+
     private void initComponents() {
 
         jLabel25 = new javax.swing.JLabel();

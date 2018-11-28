@@ -16,8 +16,7 @@ public class Tabuleiro {
     
     private Cavalo jogador1;
     private Cavalo jogador2;
-    private Posicao posicoes[][];
-    private boolean conectado;
+    private Posicao posicoes[][] = new Posicao[8][8];
     private boolean partidaEmAndamento;
 
     public Tabuleiro() {
@@ -28,12 +27,12 @@ public class Tabuleiro {
         }
     }      
     
-    public void setJogador1(String idJogador) {
-        this.jogador1 = new Cavalo(idJogador, 1);
+    public void setJogador1(Cavalo cavalo) {
+        this.jogador1 = cavalo;
     }
 
-    public void setJogador2(String idJogador) {
-        this.jogador2 = new Cavalo(idJogador, 2);
+    public void setJogador2(Cavalo cavalo) {
+        this.jogador2 = cavalo;
     }
     
     public int trataLance(Lance lance) {
@@ -63,8 +62,10 @@ public class Tabuleiro {
         int coluna = colunaAtual - colunaDest;
         
         if (linha >= -2 && linha != 0 && linha <= 2
-                && coluna >= -2 && coluna != 0 && coluna <= 2)
-            return true;
+                && coluna >= -2 && coluna != 0 && coluna <= 2) {
+        	
+        	return true;
+        }            
         else {
             linha = linhaAtual + linhaDest;
             coluna = colunaAtual + colunaDest; 
@@ -72,9 +73,6 @@ public class Tabuleiro {
             return linha >= -2 && linha != 0 && linha <= 2
                 && coluna >= -2 && coluna != 0 && coluna <= 2;
         }
-    }
-    public void setConectado(boolean conectado) {
-        this.conectado = conectado;
     }
 
     public boolean infomarEmAndamento() {

@@ -22,8 +22,23 @@ public class Cavalo {
         this.cor = cor;
         this.linha = this.coluna = -1;
         this.vencedor = false;
-    }      
+    }   
 
+    public Cavalo(String nome){
+        this.idJogador = nome;
+        this.cor = 0;
+        this.linha = this.coluna = -1;
+        this.vencedor = false;
+    }   
+
+    public Cavalo(String nome, int cor, int linha, int coluna){
+        this.idJogador = nome;
+        this.cor = 0;
+        this.linha = linha;
+        this.coluna = coluna;
+        this.vencedor = false;
+    }   
+    
     public boolean isVencedor() {
         return vencedor;
     }
@@ -56,5 +71,8 @@ public class Cavalo {
         this.coluna = coluna;
     }
     
+    public void setCor(int cor) {
+    	this.cor = cor;
+    }
     
 }
