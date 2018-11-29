@@ -5,179 +5,28 @@
  */
 package View;
 
-import Model.AtorJoust;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import rede.Lance;
 
 /**
  *
  * @author Lucas
  */
-public class InterfaceTabuleiro extends javax.swing.JFrame {
-    
+public class tela extends javax.swing.JFrame {
 
-    public InterfaceTabuleiro(AtorJoust joust) {
+    /**
+     * Creates new form tela
+     */
+    public tela() {
         initComponents();
-        
-        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                try {
-					UIManager.setLookAndFeel(info.getClassName());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-                break;
-            }
-        }
-                    
-        bNovojogo.addActionListener(new NovoJogoListener(joust));
-        bConectar.addActionListener(new ConexaoListener(joust));
-        bDesconectar.addActionListener(new DesconexaoListener(joust));
-        bEncerrar.addActionListener(new EncerrarListener(joust));
-        
-        for (Component component : jPanel3.getComponents()) {
-            if (component.getClass().equals(JButton.class))
-                ((JButton)component).addActionListener(new ClickButtonListener(joust));
-        }
-    }   
-
-    
-    public class ClickButtonListener implements ActionListener {
-        private AtorJoust joust;
-        
-        public ClickButtonListener(AtorJoust joust) {
-            this.joust = joust;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String name = ((JButton)e.getSource()).getName();
-        
-            int linha = Integer.parseInt(name.substring(1, 2));
-            int coluna = Integer.parseInt(name.substring(2, 3));
-
-            joust.novoLance(new Lance(linha, coluna, name));
-        }
-    }
-    
-    public class ConexaoListener implements ActionListener {
-        private AtorJoust joust;
-        
-        public ConexaoListener(AtorJoust joust) {
-            this.joust = joust;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            joust.conectar();
-        }
-    }
-    
-    public class DesconexaoListener implements ActionListener {
-        private AtorJoust joust;
-        
-        public DesconexaoListener(AtorJoust joust) {
-            this.joust = joust;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            joust.desconectar();
-        }
-    }
-    
-    public class NovoJogoListener implements ActionListener {
-        private AtorJoust joust;
-        
-        public NovoJogoListener(AtorJoust joust) {
-            this.joust = joust;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            joust.iniciarPartida();
-        }
-     }
-    
-    public class EncerrarListener implements ActionListener {
-        private AtorJoust joust;
-        
-        public EncerrarListener(AtorJoust joust) {
-            this.joust = joust;
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            joust.encerrar();
-        }
-    }
-    
-	public void setStatus(String status) {
-		tStatus.setText(status);		
-	}
-    
-	public void setNomeJogador1(String idJogador) {
-		tj1.setText(idJogador);		
-	}
-	
-	public void setNomeJogador2(String idJogador) {
-		tj2.setText(idJogador);		
-	}
-
-	public void setPosicaoJogador(int corJogador, int linha, int coluna) {
-		JButton posicao = getButton(linha, coluna);
-				
-		Image img = null;		
-		
-		try {
-			if (corJogador == 1) {
-				img = ImageIO.read(getClass().getResource("pcavalo.png"));
-			} else {
-				img = ImageIO.read(getClass().getResource("bcavalo.png"));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-		
-		posicao.setIcon(new ImageIcon(img));
-	}
-
-
-    public JButton getButton(int linha, int coluna) {
-         for (Component component : jPanel3.getComponents()) {
-            if (component.getClass().equals(JButton.class)) {
-                if (Integer.parseInt(component.getName().substring(1, 2)) == linha
-                        && Integer.parseInt(component.getName().substring(2, 3)) == coluna)
-                    return (JButton)component;
-            }
-        }
-         
-        return null;
-    }
-    
-    public void desativaPosicao(int linha, int coluna) {
-    	JButton posicao = getButton(linha, coluna);
-    	posicao.setIcon(null);
-    	posicao.setVisible(false);
     }
 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -261,78 +110,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         tj1 = new javax.swing.JTextField();
         tj2 = new javax.swing.JTextField();
 
-        b00.setName("b00");
-        b01.setName("b01");
-        b02.setName("b02");
-        b03.setName("b03");
-        b04.setName("b04");
-        b05.setName("b05");
-        b06.setName("b06");
-        b07.setName("b07");
-        
-        b10.setName("b10");
-        b11.setName("b11");
-        b12.setName("b12");
-        b13.setName("b13");
-        b14.setName("b14");
-        b15.setName("b15");
-        b16.setName("b16");
-        b17.setName("b17");
-        
-        b20.setName("b20");
-        b21.setName("b21");
-        b22.setName("b22");
-        b23.setName("b23");
-        b24.setName("b24");
-        b25.setName("b25");
-        b26.setName("b26");
-        b27.setName("b27");
-        
-        b30.setName("b30");
-        b31.setName("b31");
-        b32.setName("b32");
-        b33.setName("b33");
-        b34.setName("b34");
-        b35.setName("b35");
-        b36.setName("b36");
-        b37.setName("b37");
-        
-        b40.setName("b40");
-        b41.setName("b41");
-        b42.setName("b42");
-        b43.setName("b43");
-        b44.setName("b44");
-        b45.setName("b45");
-        b46.setName("b46");
-        b47.setName("b47");
-        
-        b50.setName("b50");
-        b51.setName("b51");
-        b52.setName("b52");
-        b53.setName("b53");
-        b54.setName("b54");
-        b55.setName("b55");
-        b56.setName("b56");
-        b57.setName("b57");
-        
-        b60.setName("b60");
-        b61.setName("b61");
-        b62.setName("b62");
-        b63.setName("b63");
-        b64.setName("b64");
-        b65.setName("b65");
-        b66.setName("b66");
-        b67.setName("b67");
-        
-        b70.setName("b70");
-        b71.setName("b71");
-        b72.setName("b72");
-        b73.setName("b73");
-        b74.setName("b74");
-        b75.setName("b75");
-        b76.setName("b76");
-        b77.setName("b77"); 
-        
         jMenu1.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu Joust"));
         jMenu1.setText("jMenu1");
 
@@ -1123,8 +900,44 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
         );
 
         pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new tela().setVisible(true);
+            }
+        });
     }
-    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b00;
     private javax.swing.JButton b01;
     private javax.swing.JButton b02;
@@ -1203,5 +1016,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField tStatus;
     private javax.swing.JTextField tj1;
-    private javax.swing.JTextField tj2;                
+    private javax.swing.JTextField tj2;
+    // End of variables declaration//GEN-END:variables
 }

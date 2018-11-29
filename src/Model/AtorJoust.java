@@ -54,9 +54,9 @@ public class AtorJoust {
                 atorRede.setEhMinhaVez(false);
                 
             } else if (resultado == 1) {
-                interfaceTabuleiro.setMessage("Posição inválida.");
+//                interfaceTabuleiro.setMessage("Posição inválida.");
             } else if (resultado == 2) {
-                interfaceTabuleiro.informarVencedor(tabuleiro.getIdVencedor());
+//                interfaceTabuleiro.informarVencedor(tabuleiro.getIdVencedor());
             } else
                 JOptionPane.showMessageDialog(interfaceTabuleiro, "Ocorreu um erro no tratamento de lance.");
         }  
@@ -78,7 +78,7 @@ public class AtorJoust {
         
         interfaceTabuleiro.setVisible(true);
         interfaceTabuleiro.setStatus("Aguardando conexão");
-        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");   
+//        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");   
     }
     
     /* chamado sempre que uma partida inicia */
@@ -146,7 +146,7 @@ public class AtorJoust {
     public void conectar() {
         atorRede.conectar(jogador.informarId());
         interfaceTabuleiro.setStatus("Conectado.");
-        interfaceTabuleiro.setMessage("Conectado ao servidor.\n Inicie um novo jogo.");
+//        interfaceTabuleiro.setMessage("Conectado ao servidor.\n Inicie um novo jogo.");
     }
     
 
