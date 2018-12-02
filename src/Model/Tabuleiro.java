@@ -22,9 +22,12 @@ public class Tabuleiro {
     public Tabuleiro() {
         for (int i = 0; i < posicoes.length; ++i) {
             for (int j = 0; j < posicoes.length; ++j) {
-                posicoes[i][j] = new Posicao(i, j);
+                posicoes[i][j] = new Posicao();
             }
         }
+        
+        this.jogador1 = this.jogador2 = null;
+        this.partidaEmAndamento = false;
     }      
     
     public void setJogador1(Cavalo cavalo) {
@@ -49,12 +52,12 @@ public class Tabuleiro {
     public void assumirLance(Lance lance) {
         Cavalo jogador = getJogador(lance.getIdJogador());
         
-        getPosicao(jogador.getLinha(), jogador.getColuna()).desativar();
-        getPosicao(lance.getLinha(), lance.getColuna()).setOcupacao(jogador.informarCor());
+        getPosicaoJogador(jogador).desativar();
+        getPosicao(lance.getLinha(), lance.getColuna()).setOcupacao(jogador.getCor());
     }
     
     public Cavalo getJogador(String idJogador) {
-        return jogador1.informarId() == idJogador ? jogador1 : jogador2;
+        return jogador1.getId() == idJogador ? jogador1 : jogador2;
     }
     
     public boolean validaPosicaoDestino(int linhaAtual, int colunaAtual, int linhaDest, int colunaDest) {
@@ -74,6 +77,17 @@ public class Tabuleiro {
                 && coluna >= -2 && coluna != 0 && coluna <= 2;
         }
     }
+    
+    public Posicao getPosicaoJogador(Cavalo jogador){ 
+        for (int i = 0; i < posicoes.length; ++i) {
+            for (int j = 0; j < posicoes.length; ++j) {
+                if (posicoes[i][j].informarOcupante() == jogador.getCor())
+                	return posicoes[i][j];
+            }
+        }
+        return null;
+    }
+    
 
     public boolean infomarEmAndamento() {
         return partidaEmAndamento;
@@ -96,10 +110,6 @@ public class Tabuleiro {
     }
     
       
-    public void terminarPartida() {
-        partidaEmAndamento = false;
-    }
-    
     public boolean verificarVencedor() {             
         
         return false;
@@ -107,13 +117,8 @@ public class Tabuleiro {
 
     public void ativarPosicoesIniciais() {  
         resetarPosicoes();
-        posicoes[0][4].setOcupacao(jogador2.informarCor());
-        posicoes[7][3].setOcupacao(jogador1.informarCor()); 
-        
+        posicoes[0][4].setOcupacao(jogador2.getCor());
+        posicoes[7][3].setOcupacao(jogador1.getCor());         
    }
-
-    public String getIdVencedor() {
-        return jogador1.isVencedor() ? jogador1.informarId() : jogador2.informarId();
-    }
  
 }

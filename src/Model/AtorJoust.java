@@ -39,7 +39,7 @@ public class AtorJoust {
             int resultado = tabuleiro.trataLance(lance);
             
             if (resultado == 0) {
-                atorRede.enviarJogada(new Lance(lance.getLinha(), lance.getColuna(), jogador.getLinha(), jogador.getColuna(), lance.getIdJogador()));
+                atorRede.enviarJogada(new Lance(lance.getLinha(), lance.getColuna(), lance.getIdJogador()));
                 
                 interfaceTabuleiro.desativaPosicao(jogador.getLinha(), jogador.getColuna());
                 
@@ -48,8 +48,8 @@ public class AtorJoust {
                 jogador.setLinha(lance.getLinha());
                 jogador.setColuna(lance.getColuna());
                 
-                interfaceTabuleiro.setPosicaoJogador(jogador.informarCor(), jogador.getLinha(), jogador.getColuna());                
-                tabuleiro.getPosicao(jogador.informarCor(), jogador.getLinha()).setOcupacao(3);
+                interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), jogador.getLinha(), jogador.getColuna());                
+                tabuleiro.getPosicao(jogador.getCor(), jogador.getLinha()).setOcupacao(3);
                 
                 atorRede.setEhMinhaVez(false);
                 
@@ -65,25 +65,23 @@ public class AtorJoust {
     public void receberLanceRede(Lance lance) {
         tabuleiro.assumirLance(lance);        
         
-        interfaceTabuleiro.desativaPosicao(lance.blinha, lance.bcoluna);
-        interfaceTabuleiro.setPosicaoJogador(jogador.informarCor() == 1 ? 2 : 1, lance.getLinha(), lance.getColuna());
+//        interfaceTabuleiro.desativaPosicao(lance.blinha, lance.bcoluna);
+        interfaceTabuleiro.setPosicaoJogador(jogador.getCor() == 1 ? 2 : 1, lance.getLinha(), lance.getColuna());
     }
 
     public void go() {
         interfaceTabuleiro = new InterfaceTabuleiro(this);
-        
+                
         String nome = JOptionPane.showInputDialog(interfaceTabuleiro, "Escolha o nome do participante:");
-        
         jogador = new Cavalo(nome); 
         
         interfaceTabuleiro.setVisible(true);
-        interfaceTabuleiro.setStatus("Aguardando conexão");
-//        interfaceTabuleiro.setMessage("Conecte-se ao servidor para\n começar novo jogo.");   
+        interfaceTabuleiro.setStatus("Aguardando conexão");  
     }
     
-    /* chamado sempre que uma partida inicia */
     public void iniciarPartidaRede(boolean comecoJogando) {
-    	tabuleiro = new Tabuleiro();
+    	
+    	tabuleiro = new Tabuleiro();    	
     	
         String nomeAdversario = atorRede.obterNomeAdversario();
         
@@ -97,35 +95,40 @@ public class AtorJoust {
             tabuleiro.setJogador1(jogador);
             tabuleiro.setJogador2(new Cavalo(nomeAdversario, 2, 7, 3));
             
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "Você começa jogando. Sua cor é a: preta." );
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "Você começa jogando. Sua cor é a: branca." );
             
-            interfaceTabuleiro.setNomeJogador1(jogador.informarId());
-            interfaceTabuleiro.setNomeJogador2(nomeAdversario);
-            
-        	interfaceTabuleiro.setPosicaoJogador(jogador.informarCor() == 1 ? 2 : 1, 7, 3);  
-   
+            interfaceTabuleiro.setNomeJogador1(jogador.getId());
+            interfaceTabuleiro.setNomeJogador2(nomeAdversario);   
         } else {
            	jogador.setCor(2);
             jogador.setLinha(7);
             jogador.setColuna(3);
             
-        	interfaceTabuleiro.setPosicaoJogador(jogador.informarCor() == 1 ? 2 : 1, 0, 4);  
+        	interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), 0, 4);  
             
             tabuleiro.setJogador1(new Cavalo(atorRede.obterNomeAdversario(), 1, 0, 4));
             tabuleiro.setJogador2(jogador);
             
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversário começa jogando. Sua cor é a: branca.");
+            JOptionPane.showMessageDialog(interfaceTabuleiro, "O adversário começa jogando. Sua cor é a: preta.");
             
             interfaceTabuleiro.setNomeJogador1(nomeAdversario);
-            interfaceTabuleiro.setNomeJogador2(jogador.informarId());
+            interfaceTabuleiro.setNomeJogador2(jogador.getId());
         }
         
-    	interfaceTabuleiro.setPosicaoJogador(jogador.informarCor(), jogador.getLinha(), jogador.getColuna());    	
+        
+    	interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), jogador.getLinha(), jogador.getColuna());
+    	
+    	Cavalo jogador2 = tabuleiro.getJogador(nomeAdversario);
+    	interfaceTabuleiro.setPosicaoJogador(jogador2.getCor(), jogador2.getLinha(), jogador2.getColuna());
+
 
     }
     
     /* request para iniciar uma nova partida */
-    public void iniciarPartida() {    	
+    public void iniciarPartida() {  
+//    	if (tabuleiro.infomarEmAndamento())
+//    		return;
+    	
     	this.atorRede.iniciarPartidaRede();
     }
     
@@ -136,17 +139,18 @@ public class AtorJoust {
     public void desconectar() {
         atorRede.desconectar();
 		tabuleiro.setEmAndamento(false);
+        interfaceTabuleiro.setStatus("Conectado");
     }
 
     public void encerrar() {
         atorRede.desconectar();
+        tabuleiro.setEmAndamento(false);
         System.exit(0);
     }
 
     public void conectar() {
-        atorRede.conectar(jogador.informarId());
-        interfaceTabuleiro.setStatus("Conectado.");
-//        interfaceTabuleiro.setMessage("Conectado ao servidor.\n Inicie um novo jogo.");
+        atorRede.conectar(jogador.getId());
+        interfaceTabuleiro.setStatus("Conectado");
     }
     
 

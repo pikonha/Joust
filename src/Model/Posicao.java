@@ -10,14 +10,10 @@ package Model;
  * @author Lucas
  */
 public class Posicao {
-    
-    private int linha;
-    private int coluna;
+
     private int ocupante;
     
-    public Posicao(int linha, int coluna) {
-        this.linha = linha;
-        this.coluna = coluna;
+    public Posicao() {
         this.ocupante = 0;
     }
     
@@ -39,13 +35,5 @@ public class Posicao {
 
     public int informarOcupante() {
         return this.ocupante;
-    }
-
-    public int informarLinha() {
-        return this.linha;
-    }
-
-    public int informarColuna() {
-        return this.coluna;
     }
 }

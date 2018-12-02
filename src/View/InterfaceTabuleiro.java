@@ -143,20 +143,13 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
 
 	public void setPosicaoJogador(int corJogador, int linha, int coluna) {
 		JButton posicao = getButton(linha, coluna);
-				
-		Image img = null;		
 		
 		try {
-			if (corJogador == 1) {
-				img = ImageIO.read(getClass().getResource("pcavalo.png"));
-			} else {
-				img = ImageIO.read(getClass().getResource("bcavalo.png"));
-			}
+			Image img = ImageIO.read(this.getClass().getResource(corJogador == 1 ? "bcavalo.png" : "pcavalo.png"));
+			posicao.setIcon(new ImageIcon(img));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		
-		posicao.setIcon(new ImageIcon(img));
 	}
 
 

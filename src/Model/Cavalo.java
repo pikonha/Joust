@@ -11,68 +11,70 @@ package Model;
  */
 public class Cavalo {
     
-    private String idJogador;
+    private String id;
     private int cor;
-    private int linha;
-    private int coluna;
     private boolean vencedor;
     
-    public Cavalo(String nome, int cor){
-        this.idJogador = nome;
+    private int linha;
+    private int coluna;
+    
+    public Cavalo(String id, int cor){
+        this.id = id;
         this.cor = cor;
-        this.linha = this.coluna = -1;
         this.vencedor = false;
-    }   
-
-    public Cavalo(String nome){
-        this.idJogador = nome;
-        this.cor = 0;
         this.linha = this.coluna = -1;
-        this.vencedor = false;
     }   
-
-    public Cavalo(String nome, int cor, int linha, int coluna){
-        this.idJogador = nome;
-        this.cor = 0;
+    
+    public Cavalo(String id, int cor, int linha, int coluna){
+        this.id = id;
+        this.cor = cor;
+        this.vencedor = false;
         this.linha = linha;
         this.coluna = coluna;
+    }  
+    
+    public Cavalo(String id){
+        this.id = id;
         this.vencedor = false;
-    }   
+        this.cor = this.linha = this.coluna = -1;
+    }  
     
     public boolean isVencedor() {
         return vencedor;
     }
 
-    public void setVencedor(boolean vencedor) {
-        this.vencedor = vencedor;
+    public void setVencedor() {
+        this.vencedor = true;
     } 
     
-    public String informarId() {
-        return this.idJogador;
+    public String getId() {
+        return this.id;
     }       
     
-    public int informarCor() {
+    public int getCor() {
         return cor;
-    }    
-
-    public int getLinha() {
-        return linha;
     }
 
-    public void setLinha(int linha) {
-        this.linha = linha;
-    }
+	public int getLinha() {
+		return linha;
+	}
 
-    public int getColuna() {
-        return coluna;
-    }
+	public void setLinha(int linha) {
+		this.linha = linha;
+	}
 
-    public void setColuna(int coluna) {
-        this.coluna = coluna;
-    }
+	public int getColuna() {
+		return coluna;
+	}
+
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+
+	public void setCor(int cor) {
+		this.cor = cor;		
+	}    
     
-    public void setCor(int cor) {
-    	this.cor = cor;
-    }
+    
     
 }
