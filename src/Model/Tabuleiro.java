@@ -17,7 +17,7 @@ public class Tabuleiro {
     private Cavalo jogador1;
     private Cavalo jogador2;
     private Posicao posicoes[][] = new Posicao[8][8];
-    private boolean partidaEmAndamento;
+    private boolean partidaEmAndamento;    
 
     public Tabuleiro() {
         for (int i = 0; i < posicoes.length; ++i) {
@@ -30,12 +30,13 @@ public class Tabuleiro {
         this.partidaEmAndamento = false;
     }      
     
-    public void setJogador1(Cavalo cavalo) {
-        this.jogador1 = cavalo;
-    }
-
-    public void setJogador2(Cavalo cavalo) {
-        this.jogador2 = cavalo;
+    public void criarJogador(String idJogador) {
+        if (jogador1 == null)
+        	this.jogador1 = new Cavalo(idJogador, 1, 7, 3);
+         else 
+        	this.jogador2 = new Cavalo(idJogador, 2, 0, 4);    
+        
+        ativarPosicoesIniciais();
     }
     
     public int trataLance(Lance lance) {
@@ -102,11 +103,15 @@ public class Tabuleiro {
     }
     
     public void resetarPosicoes() {
-        for (int i = 0; i < posicoes.length; ++i) {
-            for (int j = 0; j < posicoes.length; ++j) {
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
                 posicoes[i][j].setOcupacao(0);
             }
         }
+    }
+    
+    public String getIdVencedor() {
+    	return jogador1.isVencedor() ? jogador1.getId() : jogador2.getId();
     }
     
       

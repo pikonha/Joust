@@ -24,11 +24,8 @@ import javax.swing.JOptionPane;
  */
 public class AtorRede implements OuvidorProxy {
 
-    private AtorJoust atorJoust;
-    
+    private AtorJoust atorJoust;    
     private Proxy proxy;
-    
-    private boolean ehMinhaVez = false;
     
     public AtorRede(AtorJoust atorJoust) {
         super();
@@ -54,7 +51,7 @@ public class AtorRede implements OuvidorProxy {
     
     public void iniciarPartidaRede() {
         try {
-            proxy.iniciarPartida(2);            
+            proxy.iniciarPartida(2);           
             
         } catch (NaoConectadoException ex) {
             JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
@@ -65,26 +62,21 @@ public class AtorRede implements OuvidorProxy {
     public void enviarJogada(Lance lance) {
         try {
             proxy.enviaJogada(lance);
-            ehMinhaVez = false;
         } catch (NaoJogandoException ex) {
             JOptionPane.showMessageDialog(atorJoust.getInterface(), ex.getMessage());
             Logger.getLogger(AtorRede.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
     }
     
-    /* Recebe quando vai iniciar uma partida */
     @Override
-    public void iniciarNovaPartida(Integer posicao) {
-        ehMinhaVez = posicao == 1;
-        
-        atorJoust.iniciarPartidaRede(ehMinhaVez);        
+    public void iniciarNovaPartida(Integer posicao) {        
+        atorJoust.iniciarNovaPartida(posicao == 1);        
     }
     
     @Override
     public void receberJogada(Jogada jogada) {
         Lance lance = (Lance)jogada;      
         atorJoust.receberLanceRede(lance);
-        ehMinhaVez = true;  
     }
     
     public void desconectar() {
@@ -96,17 +88,12 @@ public class AtorRede implements OuvidorProxy {
         }
     }
     
-    public String obterNomeAdversario() {
-        return proxy.obterNomeAdversario(ehMinhaVez ? 2 : 1);        
+    public String obterNomeAdversario(String idUsuario) {
+		String aux1 = proxy.obterNomeAdversario(1);
+		return aux1.equals(idUsuario) ? proxy.obterNomeAdversario(2) : aux1;
     }
 
-    public boolean ehMinhaVez() {
-        return ehMinhaVez;
-    }
-    
-    public void setEhMinhaVez(boolean ehMinhaVez) {
-		this.ehMinhaVez = ehMinhaVez;
-	}
+
 
 	@Override
     public void finalizarPartidaComErro(String message) {
