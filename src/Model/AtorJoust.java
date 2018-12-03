@@ -36,17 +36,30 @@ public class AtorJoust {
     
     
     public void iniciarNovaPartida(boolean comecoJogando) {    	   	
-    	tabuleiro.resetarPosicoes();
-    	tabuleiro.criarJogador(idJogador);
+    	tabuleiro.resetarPosicoes();   
     	
         String nomeAdversario = atorRede.obterNomeAdversario(idJogador);
                 
-        tabuleiro.criarJogador(nomeAdversario);
-        
-        tabuleiro.setEmAndamento(true);        
-        
-        interfaceTabuleiro.setNomeJogador1(idJogador);
-        interfaceTabuleiro.setNomeJogador2(nomeAdversario);     
+        if (comecoJogando) {
+         	tabuleiro.criaJogador1(idJogador);
+            tabuleiro.criaJogador2(nomeAdversario);
+            
+            interfaceTabuleiro.setNomeJogador1(idJogador);
+            interfaceTabuleiro.setNomeJogador2(nomeAdversario);   
+            
+            JOptionPane.showMessageDialog(interfaceTabuleiro,"Você começa jogando. Sua cor é a branca.");
+        } else {
+         	tabuleiro.criaJogador1(nomeAdversario);
+            tabuleiro.criaJogador2(idJogador);
+            
+            interfaceTabuleiro.setNomeJogador1(nomeAdversario);
+            interfaceTabuleiro.setNomeJogador2(idJogador);   
+            
+            JOptionPane.showMessageDialog(interfaceTabuleiro,"O adversário começa jogando. Sua cor é a preta.");
+        }
+                
+        tabuleiro.setEmAndamento(true);   
+        tabuleiro.ativarPosicoesIniciais();
         
         Cavalo jogador1 = tabuleiro.getJogador(idJogador);
     	interfaceTabuleiro.setPosicaoJogador(jogador1.getCor(), jogador1.getLinha(), jogador1.getColuna());
@@ -56,42 +69,51 @@ public class AtorJoust {
     }
     
     
-    public void novoLance(Lance lance) { 
-        int resultado = tabuleiro.trataLance(lance);
-        
-        if (resultado == 0) {
-        	Cavalo jogador = tabuleiro.getJogador(idJogador);
-        	
-            atorRede.enviarJogada(new Lance(lance.getLinha(), lance.getColuna(), lance.getIdJogador()));
+    public void novoLance(int linha, int coluna) { 
+    	Cavalo jogador = tabuleiro.getJogador(idJogador);    	
+    	
+    	if (jogador.getDaVez()) {
+            Lance lance = new Lance(linha, coluna, 
+            		jogador.getLinha(), 
+            		jogador.getColuna(), idJogador);
             
-            interfaceTabuleiro.desativaPosicao(jogador.getLinha(), jogador.getColuna());
-            tabuleiro.getPosicao(jogador.getCor(), jogador.getLinha()).setOcupacao(3);
+        	int resultado = tabuleiro.trataLance(lance);
             
-            jogador.setLinha(lance.getLinha());
-            jogador.setColuna(lance.getColuna());
-            
-            interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), jogador.getLinha(), jogador.getColuna());                
-            tabuleiro.getPosicao(jogador.getCor(), jogador.getLinha()).setOcupacao(jogador.getCor());
-           
-        } else if (resultado == 1) {
-//        	JOptionPane.showMessageDialog(interfaceTabuleiro, "Posição inválida.");
-        } else if (resultado == 2) {
-        	JOptionPane.showMessageDialog(interfaceTabuleiro, "Jogador " + tabuleiro.getIdVencedor() + " venceu.");
-        	tabuleiro.resetarPosicoes();
-        } else
-            JOptionPane.showMessageDialog(interfaceTabuleiro, "Ocorreu um erro no tratamento de lance.");
-         
+            if (resultado == 0) {        	
+                atorRede.enviarJogada(lance);
+                
+                interfaceTabuleiro.desativaPosicao(jogador.getLinha(), jogador.getColuna());
+                tabuleiro.getPosicao(jogador.getCor(), jogador.getLinha()).setOcupacao(3);
+                
+                jogador.setLinha(lance.getLinha());
+                jogador.setColuna(lance.getColuna());
+                jogador.setDaVez(false);
+                
+                interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), jogador.getLinha(), jogador.getColuna());                
+                tabuleiro.getPosicao(jogador.getCor(), jogador.getLinha()).setOcupacao(jogador.getCor());
+               
+            } else if (resultado == 1) {
+            	System.out.println("posicao invalida");
+//            	JOptionPane.showMessageDialog(interfaceTabuleiro, "Posição inválida.");
+            } else if (resultado == 2) {
+            	JOptionPane.showMessageDialog(interfaceTabuleiro, "Jogador " + tabuleiro.getIdVencedor() + " venceu.");
+            	tabuleiro.resetarPosicoes();
+            } else
+                JOptionPane.showMessageDialog(interfaceTabuleiro, "Ocorreu um erro no tratamento de lance.");    
+    	}
+    	else 
+    		System.out.println("não é sua vez");
     }
     
     public void receberLanceRede(Lance lance) {
-        
-    	Cavalo jogador = tabuleiro.getJogador(lance.getIdJogador());
-    	tabuleiro.getPosicao(jogador.getLinha(), jogador.getColuna()).desativar();
-    	interfaceTabuleiro.desativaPosicao(jogador.getLinha(), jogador.getColuna());
+    	interfaceTabuleiro.desativaPosicao(lance.blinha, lance.bcoluna);
     	
     	tabuleiro.assumirLance(lance);        
-            	
+    	
+    	Cavalo jogador = tabuleiro.getJogador(lance.getIdJogador());
         interfaceTabuleiro.setPosicaoJogador(jogador.getCor(), lance.getLinha(), lance.getColuna());
+        
+        tabuleiro.getJogador(idJogador).setDaVez(true);        
     }
 
     public void go() {

@@ -73,7 +73,7 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
             int linha = Integer.parseInt(name.substring(1, 2));
             int coluna = Integer.parseInt(name.substring(2, 3));
 
-            joust.novoLance(new Lance(linha, coluna, name));
+            joust.novoLance(linha, coluna);
         }
     }
     

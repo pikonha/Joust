@@ -13,16 +13,17 @@ public class Cavalo {
     
     private String id;
     private int cor;
-    private boolean vencedor;
-    
+    private boolean vencedor;    
     private int linha;
     private int coluna;
+    private boolean daVez;
     
     public Cavalo(String id, int cor){
         this.id = id;
         this.cor = cor;
         this.vencedor = false;
         this.linha = this.coluna = -1;
+        this.setDaVez(this.cor == 1);
     }   
     
     public Cavalo(String id, int cor, int linha, int coluna){
@@ -31,12 +32,7 @@ public class Cavalo {
         this.vencedor = false;
         this.linha = linha;
         this.coluna = coluna;
-    }  
-    
-    public Cavalo(String id){
-        this.id = id;
-        this.vencedor = false;
-        this.cor = this.linha = this.coluna = -1;
+        this.setDaVez(this.cor == 1);
     }  
     
     public boolean isVencedor() {
@@ -73,6 +69,19 @@ public class Cavalo {
 
 	public void setCor(int cor) {
 		this.cor = cor;		
+	}
+
+	public boolean getDaVez() {
+		return daVez;
+	}
+
+	public void setDaVez(boolean daVez) {
+		this.daVez = daVez;
+		
+		if (daVez)
+			System.out.println("cavalo " + id + " é da vez");
+		else
+			System.out.println("cavalo " + id + " nao da vez");
 	}    
     
     

@@ -27,17 +27,16 @@ public class Tabuleiro {
         }
         
         this.jogador1 = this.jogador2 = null;
-        this.partidaEmAndamento = false;
     }      
     
-    public void criarJogador(String idJogador) {
-        if (jogador1 == null)
-        	this.jogador1 = new Cavalo(idJogador, 1, 7, 3);
-         else 
-        	this.jogador2 = new Cavalo(idJogador, 2, 0, 4);    
-        
-        ativarPosicoesIniciais();
+    public void criaJogador1(String idJogador) {
+    	this.jogador1 = new Cavalo(idJogador, 1, 7, 3);       	  
     }
+    
+    public void criaJogador2(String idJogador) {
+    	this.jogador2 = new Cavalo(idJogador, 2, 0, 4);  
+    }
+    
     
     public int trataLance(Lance lance) {
         Cavalo jogador = getJogador(lance.getIdJogador());
