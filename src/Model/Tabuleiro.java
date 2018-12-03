@@ -57,7 +57,7 @@ public class Tabuleiro {
     }
     
     public Cavalo getJogador(String idJogador) {
-        return jogador1.getId() == idJogador ? jogador1 : jogador2;
+    	return jogador1.getId().equals(idJogador) ? jogador1 : jogador2;
     }
     
     public boolean validaPosicaoDestino(int linhaAtual, int colunaAtual, int linhaDest, int colunaDest) {

@@ -170,6 +170,10 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     	posicao.setIcon(null);
     	posicao.setVisible(false);
     }
+    
+	public String getStatus() {
+		return tStatus.getText();
+	}  
 
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -1196,5 +1200,6 @@ public class InterfaceTabuleiro extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField tStatus;
     private javax.swing.JTextField tj1;
-    private javax.swing.JTextField tj2;                
+    private javax.swing.JTextField tj2;
+              
 }

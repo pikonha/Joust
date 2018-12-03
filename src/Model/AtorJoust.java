@@ -125,10 +125,10 @@ public class AtorJoust {
     
     /* request para iniciar uma nova partida */
     public void iniciarPartida() {  
-//    	if (tabuleiro.infomarEmAndamento())
-//    		JOptionPane.showMessageDialog(getInterface(), "Jogo já em andamento");
-    	
-    	this.atorRede.iniciarPartidaRede();
+    	if (tabuleiro.infomarEmAndamento())
+    		JOptionPane.showMessageDialog(getInterface(), "Jogo já em andamento");
+    	else
+    		this.atorRede.iniciarPartidaRede();
     }
     
     public static void main(String[] args) {
@@ -136,9 +136,11 @@ public class AtorJoust {
     }  
 
     public void desconectar() {
-        atorRede.desconectar();
-		tabuleiro.setEmAndamento(false);
-        interfaceTabuleiro.setStatus("Conectado");
+    	if (interfaceTabuleiro.getStatus() == "Conectado") {
+            atorRede.desconectar();
+    		tabuleiro.setEmAndamento(false);
+            interfaceTabuleiro.setStatus("Desconectado");
+    	}  
     }
 
     public void encerrar() {
