@@ -43,7 +43,7 @@ public class Tabuleiro {
         
         if (validaPosicaoDestino(jogador.getLinha(), jogador.getColuna(),
                                 lance.getLinha(), lance.getColuna())) {
-            return verificarVencedor() ? 2 : 0;
+            return verificarVencedor(lance.getIdJogador()) ? 2 : 0;
         }
         
         return 1;
@@ -65,7 +65,8 @@ public class Tabuleiro {
         int coluna = colunaAtual - colunaDest;
         
         if (linha >= -2 && linha != 0 && linha <= 2
-                && coluna >= -2 && coluna != 0 && coluna <= 2) {
+                && coluna >= -2 && coluna != 0 && coluna <= 2
+                && Math.abs(linha) != Math.abs(coluna)) {
         	
         	return true;
         }            
@@ -74,7 +75,8 @@ public class Tabuleiro {
             coluna = colunaAtual + colunaDest; 
             
             return linha >= -2 && linha != 0 && linha <= 2
-                && coluna >= -2 && coluna != 0 && coluna <= 2;
+                && coluna >= -2 && coluna != 0 && coluna <= 2
+                		&& Math.abs(linha) != Math.abs(coluna);
         }
     }
     
@@ -114,9 +116,17 @@ public class Tabuleiro {
     }
     
       
-    public boolean verificarVencedor() {             
-        
-        return false;
+    public boolean verificarVencedor(String idJogador) {    	
+    	Cavalo jogador = getJogador(idJogador);
+    	
+    	for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+            	if (validaPosicaoDestino(jogador.getLinha(), jogador.getColuna(), i, j))
+            		return false;        	
+            }
+        }   	    	
+    	
+        return true;
     }
 
     public void ativarPosicoesIniciais() {  

@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="ServidorJogos/new-lib/dualrpc-common-2.0.2.jar"/>
 	<classpathentry kind="lib" path="ServidorJogos/new-lib/dualrpc-server-2.0.2.jar"/>
 	<classpathentry kind="lib" path="ServidorJogos/new-lib/log4j-1.2.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lucas/Desktop/Joust/netgames/ngnrtFramework.jar"/>
 	<classpathentry kind="lib" path="netgames"/>
+	<classpathentry kind="lib" path="E:/Joust/netgames/ngnrtFramework.jar"/>
 	<classpathentry kind="output" path="ServidorJogos/bin"/>
 </classpath>

@@ -7,9 +7,6 @@ package Model;
 
 import View.InterfaceTabuleiro;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import rede.AtorRede;
 import rede.Lance;
